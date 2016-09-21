@@ -26,23 +26,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Resource
 	ProjectDao projectDao;
 
-	// 分页查询
 	public Page findProject(int currentpage, int size) {
-		Specification<Project> spec = new Specification<Project>() {
-			public Predicate toPredicate(Root<Project> root,
-					CriteriaQuery<?> query, CriteriaBuilder cb) {
-				return null;
-			}
-		};
 		Pageable pb = new PageRequest(currentpage - 1, size,
 				Sort.Direction.ASC, "projectId");
 		Page page = projectDao.findAll(pb);
 		return page;
 	}
-
-	// 按id查询
-	/*public Project findProjectById(int projectId) {
-		return projectDao.findProjectById(projectId);
-	}*/
 
 }

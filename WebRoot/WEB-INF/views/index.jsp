@@ -75,7 +75,7 @@
 					</div>
 					<div class="accordionContent">
 						<ul class="tree treeFolder">
-							<li><a href="${ctx}/product/toProductManage.do" target="navTab" rel="dlg_page">产品管理</a></li>
+							<li><a href="${ctx}/product/toProductManage.do" target="navTab" rel="productManage">产品管理</a></li>
 							<li><a>文章管理</a>
 								<ul>
 									<li><a href="main.html" target="navTab" rel="main">管理文章</a></li>
