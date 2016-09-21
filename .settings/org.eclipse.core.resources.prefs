@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
 encoding//WebRoot/WEB-INF/views/index.jsp=UTF-8
+encoding//WebRoot/WEB-INF/views/product/addProduct.jsp=UTF-8
 encoding//WebRoot/WEB-INF/views/product/productList.jsp=UTF-8
 encoding/<project>=UTF-8
