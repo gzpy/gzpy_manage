@@ -83,7 +83,7 @@
 								</ul>
 							</li>
 							
-							<li><a href="newPage1.html" target="navTab" rel="dlg_page">项目管理</a></li>
+							<li><a href="${ctx}/find.do" target="navTab" rel="dlg_page1">项目管理</a></li>
 							
 							<li><a>留言管理</a>
 								<ul>
