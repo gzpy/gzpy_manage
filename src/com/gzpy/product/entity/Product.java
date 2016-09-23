@@ -39,8 +39,8 @@ public class Product implements Serializable{
 	@Column(name = "SEOKeywords")
 	private String SEOKeywords; // SEO关键字
 
-	@Column(name = "SEODescribtion")
-	private String SEODescribtion;// SEO描述
+	@Column(name = "SEODescription")
+	private String SEODescription;// SEO描述
 
 	@Column(name = "userId")
 	private String userId; // 发布人
@@ -92,24 +92,24 @@ public class Product implements Serializable{
 		return SEOTitle;
 	}
 
-	public void setSEOTitle(String sEOTitle) {
-		SEOTitle = sEOTitle;
+	public void setSEOTitle(String SEOTitle) {
+		this.SEOTitle = SEOTitle;
 	}
 
 	public String getSEOKeywords() {
 		return SEOKeywords;
 	}
 
-	public void setSEOKeywords(String sEOKeywords) {
-		SEOKeywords = sEOKeywords;
+	public void setSEOKeywords(String SEOKeywords) {
+		this.SEOKeywords = SEOKeywords;
 	}
 
-	public String getSEODescribtion() {
-		return SEODescribtion;
+	public String getSEODescription() {
+		return SEODescription;
 	}
 
-	public void setSEODescribtion(String sEODescribtion) {
-		SEODescribtion = sEODescribtion;
+	public void setSEODescription(String SEODescription) {
+		this.SEODescription = SEODescription;
 	}
 
 	public String getUserId() {

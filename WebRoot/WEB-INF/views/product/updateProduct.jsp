@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dl class="nowrap">
 					<dt style="text-align: right;">SEO描述：</dt>
 					<dd>
-						<textarea name="SEODescribtion" rows="2" cols="30">${product.SEODescribtion }</textarea>
+						<textarea name="SEODescription" rows="2" cols="30">${product.SEODescription }</textarea>
 					</dd>
 				</dl>
 				<dl class="nowrap">

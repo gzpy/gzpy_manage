@@ -10,43 +10,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
    	<div class="pageContent">
-		<form method="post" action="${ctx}/product/addProduct.do" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<form method="post" action="${ctx}/news/addNews.do" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
 			<div class="pageFormContent" layoutH="58">
 				<dl>
-					<dt style="text-align: right;">产品标题：</dt>
+					<dt style="text-align: right;">新闻标题：</dt>
 					<dd>
-						<input class="required" name="productTitle" value="" type="text" size="26" maxlength="50"/>
+						<input class="required" name="newsTitle" value="" type="text" size="20" maxlength="50"/>
 					</dd>
 				</dl>
 				<dl>
-					<dt style="text-align: right;">发布时间：</dt>
+					<dt style="text-align: right;">新闻类型：</dt>
 					<dd>
-						<input type="text" name="productIssueDate" class="date required" readonly="true"/>
-						<a class="inputDateButton" href="javascript:;">选择</a>
+						<select name="typeId" class="required combox">
+							<option value="">---请选择---</option>
+							<c:forEach items="${list_newsType}" var="newsType">
+								<option value="${newsType.typeId }">${newsType.typeName }</option>
+							</c:forEach>
+						</select>
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">SEO标题：</dt>
 					<dd>
-						<input name="SEOTitle" type="text" size="26" maxlength="50" value=""/>
+						<input name="SEOTitle" value="" type="text" size="20" maxlength="50"/>
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">SEO关键字：</dt>
 					<dd>
-						<input name="SEOKeywords" type="text" size="26" maxlength="50" value=""/>
+						<input name="SEOKeywords" value="" type="text" size="20" maxlength="50"/>
 					</dd>
 				</dl>
 				<dl class="nowrap">
 					<dt style="text-align: right;">SEO描述：</dt>
 					<dd>
-						<textarea name="SEODescription" rows="2" cols="30"></textarea>
+						<textarea class="textInput" rows="2" cols="80" name="SEODescription"></textarea>
 					</dd>
 				</dl>
 				<dl class="nowrap">
-					<dt style="text-align: right;">产品简介：</dt>
+					<dt style="text-align: right;">文章内容：</dt>
 					<dd>
-						<textarea class="editor" name="introduction" rows="12" cols="80" tools="mfull"></textarea>
+						<textarea class="editor" rows="12" cols="80" name="newsContent"></textarea>
 					</dd>
 				</dl>
 			</div>
