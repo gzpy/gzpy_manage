@@ -12,30 +12,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	<div class="pageContent">
 		<form method="post" action="${ctx}/product/addProduct.do" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
 			<div class="pageFormContent" layoutH="58">
-				<p>
-					<label style="text-align: right;">产品标题：</label>
-					<input name="productTitle" type="text" size="28" value="" maxlength="20" class="required"/>
-				</p>
-				<p>
-					<label style="text-align: right;">发布时间：</label>
-					<input type="text" name="productIssueDate" class="date required" readonly="true"/>
-					<a class="inputDateButton" href="javascript:;">选择</a>
-				<p>
-					<label style="text-align: right;">SEO标题：</label>
-					<input name="SEOTitle" type="text" size="28" maxlength="50" value=""/>
-				</p>
-				<p>
-					<label style="text-align: right;">SEO关键字：</label>
-					<input name="SEOKeywords" type="text" size="28" maxlength="50" value=""/>
-				</p>
-				<p>
-					<label style="text-align: right;">SEO描述：</label>
-					<textarea name="SEODescribtion" rows="2" cols="30"></textarea>
-				</p>
-				<p>
-					<label style="text-align: right;">产品简介：</label>
-					<textarea class="editor" name="introduction" rows="15" cols="80" tools="mfull"></textarea>
-				</p>
+				<dl>
+					<dt style="text-align: right;">产品标题：</dt>
+					<dd>
+						<input class="required" name="productTitle" value="" type="text" size="26" maxlength="50"/>
+					</dd>
+				</dl>
+				<dl>
+					<dt style="text-align: right;">发布时间：</dt>
+					<dd>
+						<input type="text" name="productIssueDate" class="date required" readonly="true"/>
+						<a class="inputDateButton" href="javascript:;">选择</a>
+					</dd>
+				</dl>
+				<dl>
+					<dt style="text-align: right;">SEO标题：</dt>
+					<dd>
+						<input name="SEOTitle" type="text" size="26" maxlength="50" value=""/>
+					</dd>
+				</dl>
+				<dl>
+					<dt style="text-align: right;">SEO关键字：</dt>
+					<dd>
+						<input name="SEOKeywords" type="text" size="26" maxlength="50" value=""/>
+					</dd>
+				</dl>
+				<dl class="nowrap">
+					<dt style="text-align: right;">SEO描述：</dt>
+					<dd>
+						<textarea name="SEODescribtion" rows="2" cols="30"></textarea>
+					</dd>
+				</dl>
+				<dl class="nowrap">
+					<dt style="text-align: right;">产品简介：</dt>
+					<dd>
+						<textarea class="editor" name="introduction" rows="12" cols="80" tools="mfull"></textarea>
+					</dd>
+				</dl>
 			</div>
 			<div class="formBar">
 				<ul>

@@ -19,7 +19,7 @@ public class ProductServiceImpl implements ProductService{
 	@Autowired
 	private ProductDao productDao;
 	
-	public Page<Product> finProductByCurrentPage(int currentPage, int pageSize) {
+	public Page<Product> findProductByCurrentPage(int currentPage, int pageSize) {
 		
 		Pageable pb = new PageRequest(currentPage - 1, pageSize,
 				Sort.Direction.ASC, "productId");
@@ -29,9 +29,21 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public Product addProduct(Product product) {
+	public Product saveProduct(Product product) {
 		
 		return productDao.save(product);
+	}
+
+	@Override
+	public Product findProductById(String productId) {
+		
+		return productDao.findOne(productId);
+	}
+
+	@Override
+	public void deleteProduct(String productId) {
+		
+		productDao.delete(productId);
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.gzpy.product.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,7 +10,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "gzpy_products")
-public class Product {
+public class Product implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6248899362699688980L;
 
 	@Id
 	@Column(name = "productId")

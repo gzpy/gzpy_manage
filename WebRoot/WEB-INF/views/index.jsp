@@ -78,8 +78,8 @@
 							<li><a href="${ctx}/product/toProductManage.do" target="navTab" rel="productManage">产品管理</a></li>
 							<li><a>文章管理</a>
 								<ul>
-									<li><a href="main.html" target="navTab" rel="main">管理文章</a></li>
-									<li><a href="main.html" target="navTab" rel="main">管理文章分类</a></li>
+									<li><a href="${ctx}/news/toNewsManage.do" target="navTab" rel="newsManage">管理文章</a></li>
+									<li><a href="${ctx}/newsType/toNewsTypeManage.do" target="navTab" rel="newsTypeManage">管理文章分类</a></li>
 								</ul>
 							</li>
 							

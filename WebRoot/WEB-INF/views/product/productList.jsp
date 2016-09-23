@@ -17,7 +17,7 @@
 	</form>
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="#" method="post">
+	<form onsubmit="return navTabSearch(this);" action="" method="post">
 		<div class="searchBar">
 			<table class="searchContent">
 				<tr>
@@ -36,7 +36,7 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="${ctx}/product/toAddProduct.do" target="dialog" rel="addProduct" mask="true" title="添加产品" width="686" height="508" resizable="false"><span>添加产品</span></a></li>
+			<li><a class="add" href="${ctx}/product/toAddProduct.do" target="dialog" rel="addProduct" mask="true" title="添加产品" width="850" height="530" resizable="false"><span>添加产品</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="80%" layoutH="112">
@@ -57,8 +57,8 @@
 					<td>${product.productTitle}</td>
 					<td>${product.issueDate}</td>
 					<td>
-						<a title="删除" target="ajaxTodo" href="demo/common/ajaxDone.html?id=xxx" class="btnDel">删除</a>
-						<a title="编辑" target="navTab" href="demo_page4.html?id=xxx" class="btnEdit">编辑</a>
+						<a title="删除" target="ajaxTodo" href="${ctx }/product/deleteProduct.do?productId=${product.productId}" class="btnDel">删除</a>
+						<a title="编辑" target="dialog" href="${ctx}/product/toUpdateProduct.do?productId=${product.productId}" mask="true" title="添加产品" width="850" height="530" class="btnEdit">编辑</a>
 					</td>
 				</tr>
 			</c:forEach>
