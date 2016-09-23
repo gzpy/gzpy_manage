@@ -11,7 +11,7 @@
 <head></head>
 
 <body>
-	<form id="pagerForm" method="post" action="${ctx}/product/toProductManage.do">
+	<form id="pagerForm" method="post" action="${ctx}/newsType/toNewsTypeManage.do">
 		<input type="hidden" name="pageNum" value="${currentPage}" />
 		<input type="hidden" name="numPerPage" value="${pageSize}" />
 	</form>
@@ -22,7 +22,7 @@
 			<table class="searchContent">
 				<tr>
 					<td>
-						<label>产品名称：</label>
+						<label>文章类型名称：</label>
 						<input type="text" name="keywords" value=""/>
 					</td>
 					<td>
@@ -36,7 +36,7 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="${ctx}/product/toAddProduct.do" target="dialog" rel="addProduct" mask="true" title="添加产品" width="850" height="530" resizable="false"><span>添加产品</span></a></li>
+			<li><a class="add" href="${ctx}/newsType/toAddNewsType.do" target="dialog" rel="addnewsType" mask="true" title="添加文章类型" width="550" height="150" resizable="false"><span>添加文章类型</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="80%" layoutH="112">
@@ -44,22 +44,19 @@
 			<tr>
 				<!-- <th width="22" align="center"><input type="checkbox" group="ids" class="checkboxCtrl"></th>-->
 				<th width="40" align="center">序号</th>
-				<th width="60" align="center">产品名称</th>
-				<th width="50" align="center">发布日期</th>
+				<th width="50" align="center">文章类型</th>
 				<th width="150" align="center">操作</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${list_product}" var="product" varStatus="idx">
+			<c:forEach items="${list_newsType}" var="newsType" varStatus="idx">
 				<tr>
 					<!-- <td><input name="ids" value="xxx" type="checkbox"></td>-->
 					<td align="center">${idx.index + (pageSize*(currentPage-1))+1}</td>
-					<td>${product.productTitle}</td>
-					<td>${product.issueDate}</td>
+					<td>${newsType.typeName}</td>
 					<td>
-						<a title="删除" target="ajaxTodo" href="${ctx }/product/deleteProduct.do?productId=${product.productId}" class="btnDel">删除</a>
-						<a title="编辑" target="dialog" href="${ctx}/product/toUpdateProduct.do?productId=${product.productId}" mask="true" title="修改产品" width="850" height="530" class="btnEdit">编辑</a>
-						<a title="查看详情" target="dialog" href="${ctx}/product/toProductDetail.do?productId=${product.productId}" mask="true" title="查看详情" width="850" height="530" class="btnView">查看详情</a>
+						<a title="删除" target="ajaxTodo" href="${ctx }/newsType/deleteNewsType.do?typeId=${newsType.typeId}" class="btnDel">删除</a>
+						<a title="编辑" target="dialog" href="${ctx}/newsType/toUpdateNewsType.do?typeId=${newsType.typeId}" mask="true" title="修改新闻类型" width="550" height="150" class="btnEdit">编辑</a>
 					</td>
 				</tr>
 			</c:forEach>

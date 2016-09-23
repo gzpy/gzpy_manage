@@ -161,4 +161,13 @@ public class ProductController extends BaseController{
 		}
 		return this.ajaxDoneError("删除失败");
 	}
+	
+	@RequestMapping("/toProductDetail.do")
+	public String toProductDetail(String productId,ModelMap map){
+		
+		Product product = productService.findProductById(productId);
+		map.addAttribute("product", product);
+		
+		return "product/productDetail.jsp";
+	}
 }
