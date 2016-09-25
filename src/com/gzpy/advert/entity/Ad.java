@@ -3,9 +3,10 @@ package com.gzpy.advert.entity;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
-
-public class Advert implements Serializable {
+@Entity(name="gzpy_ad")
+public class Ad implements Serializable {
 
 	/**
 	 * 
@@ -15,15 +16,15 @@ public class Advert implements Serializable {
 	@Id
 	@Column(name = "id")
 	private String id; 
-	
+
 	@Column(name = "adName")
 	private String adName; 
 	
 	@Column(name = "adLink")
 	private String adLink; 
 	
-	@Column(name = "adDescribtion")
-	private String adDescribtion; 
+	@Column(name = "adDescription")
+	private String adDescription; 
 	
 	@Column(name = "adWidth")
 	private int adWidth; 
@@ -34,8 +35,8 @@ public class Advert implements Serializable {
 	@Column(name = "imagePath")
 	private String imagePath; 
 	
-	@Column(name = "order")
-	private int order; 
+	@Column(name = "adOrder")
+	private int adOrder; 
 	
 	@Column(name = "delStatus")
 	private String delStatus;
@@ -64,12 +65,12 @@ public class Advert implements Serializable {
 		this.adLink = adLink;
 	}
 
-	public String getAdDescribtion() {
-		return adDescribtion;
+	public String getAdDescription() {
+		return adDescription;
 	}
 
-	public void setAdDescribtion(String adDescribtion) {
-		this.adDescribtion = adDescribtion;
+	public void setAdDescription(String adDescription) {
+		this.adDescription = adDescription;
 	}
 
 	public int getAdWidth() {
@@ -96,12 +97,14 @@ public class Advert implements Serializable {
 		this.imagePath = imagePath;
 	}
 
-	public int getOrder() {
-		return order;
+	
+
+	public int getAdOrder() {
+		return adOrder;
 	}
 
-	public void setOrder(int order) {
-		this.order = order;
+	public void setAdOrder(int adOrder) {
+		this.adOrder = adOrder;
 	}
 
 	public String getDelStatus() {

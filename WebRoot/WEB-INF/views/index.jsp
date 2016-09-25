@@ -94,8 +94,8 @@
 							
 							<li><a>系统设置</a>
 								<ul>
-									<li><a href="w_panel.html" target="navTab" rel="w_panel">广告位管理</a></li>
-									<li><a href="w_panel.html" target="navTab" rel="w_panel">用户设置</a></li>
+									<li><a href="${ctx}/advert/toAdManage.do" target="navTab" rel="adManage">广告位管理</a></li>
+									<li><a href="${ctx}/user/toUserManage.do" target="navTab" rel="userManage">用户设置</a></li>
 								</ul>
 							</li>
 						</ul>
