@@ -22,7 +22,7 @@
 	</bean>
 	
 	<!-- 定义无需Controller的url<->view直接映射 -->
-	<mvc:view-controller path="/" view-name="index.jsp"/>
+	<mvc:view-controller path="/" view-name="login.jsp"/>
 	
 	<!-- 配置 文件上传的支持 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -32,6 +32,6 @@
 		<!-- max size of file in memory (in bytes 10MB) -->
 		<property name="maxInMemorySize" value="10485760" />
 	</bean>
-	
-	<mvc:resources mapping="/dwz/**" location="/dwz/" cache-period="31536000"/>
+   	<mvc:resources mapping="/dwz/**" location="/dwz/" cache-period="31536000"/>
+	<mvc:resources mapping="/login/**" location="/login/" cache-period="31536000"/>
 </beans>

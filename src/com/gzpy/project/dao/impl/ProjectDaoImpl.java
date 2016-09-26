@@ -12,14 +12,26 @@ import com.gzpy.project.entity.Project;
 
 public class ProjectDaoImpl {
 	
-	EntityManager em;
+	@Resource
+	private EntityManager em;
     
-	public Project findProjectById(int projectId) {
-		String sql = "select * from gzpy_projects where projectId=:projectid";
-		Query q = em.createNativeQuery(sql);
-		
-		Project project = (Project) q.getSingleResult();
+	public Project findProjectById(String projectId) {
+		String hql = " from gzpy_projects g where g.projectId=?";
+		Query q = em.createQuery(hql).setParameter(1, projectId);
+		Project project= (Project) q.getSingleResult();
 		return project;
+	
 	}
-
+	
+	public int deleteProject(String projectId){
+		String sql="delete  from gzpy_projects where projectId=:projectId";
+		Query q=em.createNativeQuery(sql);
+		q.setParameter("projectId", projectId);
+		return q.executeUpdate();
+	}
+	
+	
+	public Project updateProject(Project project){
+		return em.merge(project);
+	}
 }
