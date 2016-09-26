@@ -19,5 +19,8 @@ public interface UserService {
 	public void deleteUser(String userId);
 	
 	public User findUserById(String userId);
+	
+	public Page<User> findUserByName(final String inputName, int currentPage,
+			int pageSize);
 
 }

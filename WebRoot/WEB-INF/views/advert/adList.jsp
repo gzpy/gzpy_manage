@@ -17,32 +17,33 @@
 	</form>
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="" method="post">
-		<div class="searchBar">
-			<table class="searchContent">
-				<tr>
-					<td>
-						<label>广告名称：</label>
-						<input type="text" name="keywords" value=""/>
-					</td>
-					<td>
-						<div class="buttonActive"><div class="buttonContent"><button type="submit">&nbsp;&nbsp;检索&nbsp;&nbsp;</button></div></div>
-					</td>
-				</tr>
-			</table>
-		</div>
-	</form>
-</div>
+		<form rel="pagerForm" onsubmit="return navTabSearch(this);"
+			action="${ctx}/advert/findAdByName.do" method="post">
+			<div class="searchBar">
+				<ul class="searchContent">
+					<li><label>广告名称：</label> <input type="text"
+						name="inputName" value="" class="required" /></li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">检索</button>
+						</div>
+					</div>
+				</ul>
+			</div>
+		</form>
+	</div>
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
 			<li><a class="add" href="${ctx}/advert/toAddAd.do" target="dialog" rel="addAd" mask="true" title="添加广告" width="850" height="530" resizable="false"><span>添加广告</span></a></li>
+			<li><a class="add" href="${ctx}/advert/deleteSelectUser.do?String[]=${ids}" target="dialog" rel="addAd" mask="true" title="添加广告" width="850" height="530" resizable="false"><span>批量删除</span></a></li>
 		</ul>
 	</div>
+	<form action="">
 	<table class="table" width="80%" layoutH="112">
 		<thead>
 			<tr>
-				<!-- <th width="22" align="center"><input type="checkbox" group="ids" class="checkboxCtrl"></th>-->
+				<th width="22" align="center"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
 				<th width="40" align="center">序号</th>
 				<th width="50" align="center">广告名称</th>
 				<th width="50" align="center">广告描述</th>
@@ -53,7 +54,7 @@
 		<tbody>
 			<c:forEach items="${list_ad}" var="ad" varStatus="idx">
 				<tr>
-					<!-- <td><input name="ids" value="xxx" type="checkbox"></td>-->
+					<td><input name="ids" value="${ad.id }" type="checkbox"></td>
 					<td align="center">${idx.index + (pageSize*(currentPage-1))+1}</td>
 					<td>${ad.adName}</td>
 					<td>${ad.adDescription}</td>
@@ -69,6 +70,7 @@
 			
 		</tbody>
 	</table>
+	</form>
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>

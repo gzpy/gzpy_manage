@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<dl class="nowrap">
 				<dt style="text-align: right;">广告描述：</dt>
 				<dd>
-					<textarea rows="15" cols="80" name="newsContent" readonly="readonly">${ad.adDescription }</textarea>
+					<textarea class="editor" rows="15" cols="80" name="newsContent" readonly="readonly">${ad.adDescription }</textarea>
 				</dd>
 			</dl>
 		</div>

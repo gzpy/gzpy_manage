@@ -11,8 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gzpy.advert.entity.Ad;
 import com.gzpy.advert.service.AdService;
 import com.gzpy.common.BaseController;
-import com.gzpy.product.entity.Product;
-import com.gzpy.product.service.ProductService;
+
 import com.gzpy.util.GenerateGUID;
 
 @Controller
@@ -138,5 +137,42 @@ public class AdController extends BaseController {
 		Ad ad=adService.findAdById(id);
 		map.addAttribute("ad",ad);
 		return "advert/adDetail.jsp";
+	}
+	//根据广告名称查询广告
+	@RequestMapping("/findAdByName.do")
+	public String findAdByName(String pageNum, String numPerPage,String inputName,ModelMap map){
+		if (pageNum == null || "".equals(pageNum)) {
+			currentPage = 1;
+		} else {
+			currentPage = Integer.parseInt(pageNum);
+		}
+
+		if (numPerPage == null || "".equals(numPerPage)) {
+			pageSize = 5;
+		} else {
+			pageSize = Integer.parseInt(numPerPage);
+		}
+		int totalPage = adService.findAdByName(inputName,currentPage, pageSize)
+				.getTotalPages();
+		long totalCount = adService.findAdByName(inputName,currentPage, pageSize)
+				.getTotalElements();
+		List<Ad> list_ad = adService.findAdByName(inputName,currentPage, pageSize)
+				.getContent();
+		map.addAttribute("list_ad",list_ad);
+		  map.addAttribute("totalPage",totalPage);
+		  map.addAttribute("totalCount",totalCount);
+		  map.addAttribute("numPerPage", numPerPage);
+		  map.addAttribute("currentPage", currentPage);
+		  return "advert/adList.jsp";
+	}
+	//批量删除广告
+	@RequestMapping("/deleteSelectUser.do")
+	public ModelAndView deleteSelectUser(String[] ids){
+		for(int i=0;i<=ids.length;i++){
+			String id=ids[i];
+			System.out.println(id);
+		}
+		return null;
+		
 	}
 }
