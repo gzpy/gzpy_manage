@@ -109,4 +109,28 @@ public class ProjectAction extends BaseController{
 		return "project/projectDetail.jsp";
 	
 	}
+	//检索
+	@RequestMapping("/searchProject.do")
+	  public String searchProject(String pageNum,String numPerPage,String projectTitle,ModelMap map){
+		String currentPage;
+		  if(pageNum==null){
+		     currentPage="1";
+		  }else{
+			  currentPage=pageNum;
+		  }
+		  if(numPerPage == null || "".equals(numPerPage)){
+				numPerPage = "5";
+			} 
+		  int totalPage=projectService.findProjectBySearch(Integer.parseInt(currentPage),Integer.parseInt(numPerPage),projectTitle).getTotalPages();
+		  long totalCount = projectService.findProjectBySearch(
+					Integer.parseInt(currentPage), Integer.parseInt(numPerPage),projectTitle).getTotalElements();
+		  List<Project> list=projectService.findProjectBySearch(Integer.parseInt(currentPage), Integer.parseInt(numPerPage),projectTitle).getContent();
+		  map.addAttribute("list",list);
+		  map.addAttribute("totalPage",totalPage);
+		  map.addAttribute("totalCount",totalCount);
+		  map.addAttribute("numPerPage", numPerPage);
+		  map.addAttribute("currentPage", currentPage);
+		  return "project/project.jsp";
+	  }
+	
 }

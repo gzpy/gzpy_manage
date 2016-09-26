@@ -9,11 +9,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+
 import com.gzpy.project.dao.ProjectDao;
 import com.gzpy.project.entity.Project;
 import com.gzpy.project.service.ProjectService;
+import com.gzpy.remark.entity.Remark;
+
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -59,4 +63,18 @@ public class ProjectServiceImpl implements ProjectService {
     	return projectDao.updateProject(project);
     }
 
+    public Page findProjectBySearch(int currentpage,int size,final String projectTitle){
+    	Specification<Project> spec = new Specification<Project>() {
+			public Predicate toPredicate(Root<Project> root,
+					CriteriaQuery<?> query, CriteriaBuilder cb) {
+				Path<String> title=root.get("projectTitle");
+				 Predicate searchTitle=cb.like(title, "%"+projectTitle+"%");
+				 query.where(cb.and(searchTitle));  
+				return query.getRestriction();  
+			}
+		};
+		return projectDao.findAll(spec,new PageRequest(currentpage - 1, size,
+				Sort.Direction.DESC, "issueDate"));
+    	
+    }
 }
