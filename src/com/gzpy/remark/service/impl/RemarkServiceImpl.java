@@ -53,7 +53,6 @@ public class RemarkServiceImpl implements RemarkService{
 		Specification<Remark> spec = new Specification<Remark>() {
 			public Predicate toPredicate(Root<Remark> root,
 					CriteriaQuery<?> query, CriteriaBuilder cb) {
-				
 				Path<String> delStatus = root.get("delStatus");
 				query.where(cb.equal(delStatus, "N"));
 				return query.getRestriction();   
@@ -62,5 +61,28 @@ public class RemarkServiceImpl implements RemarkService{
 		return remarkDao.findAll(spec,new PageRequest(currentpage - 1, size,
 				Sort.Direction.DESC, "remarkTime"));
 	}
-  
+  //留言检索
+	public Page findRemarkBySearch(int currentpage, int size,final String name,final String status){
+		Specification<Remark> spec = new Specification<Remark>() {
+			public Predicate toPredicate(Root<Remark> root,
+					CriteriaQuery<?> query, CriteriaBuilder cb) {
+				Path<String> delStatus = root.get("delStatus");
+				Path<String> remarkname=root.get("name");
+				//Path<String> remarkTime=root.get("remarkTime");
+				Path<String> remarkstatus=root.get("status");
+				 Predicate isDelStatus=cb.equal(delStatus, "N");
+				 Predicate searchRemarkName=(cb.like(remarkname,"%"+name+"%"));
+				// Predicate searchRemarkTime=cb.equal(remarkTime, remark.getRemarkTime());
+				 Predicate searchStatus=cb.equal(remarkstatus,status);
+				 if(status==""){
+					 query.where(cb.and(isDelStatus,searchRemarkName));  
+				 }else
+				 query.where(cb.and(isDelStatus,searchRemarkName,searchStatus));  
+				return query.getRestriction();  
+			}
+		};
+		return remarkDao.findAll(spec,new PageRequest(currentpage - 1, size,
+				Sort.Direction.DESC, "remarkTime"));
+	}
+	
 }

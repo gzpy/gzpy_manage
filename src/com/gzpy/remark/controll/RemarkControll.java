@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gzpy.common.BaseController;
@@ -91,6 +92,29 @@ public class RemarkControll extends BaseController{
 		  long totalCount = remarkService.findRemarkByDelStatus(
 					Integer.parseInt(currentPage), Integer.parseInt(numPerPage)).getTotalElements();
 		  List<Project> list=remarkService.findRemarkByDelStatus(Integer.parseInt(currentPage), Integer.parseInt(numPerPage)).getContent();
+		  map.addAttribute("remarklist",list);
+		  map.addAttribute("totalPage",totalPage);
+		  map.addAttribute("totalCount",totalCount);
+		  map.addAttribute("numPerPage", numPerPage);
+		  map.addAttribute("currentPage", currentPage);
+		  return "remark/remarkManager.jsp";
+	}
+	
+	@RequestMapping("/goRemarkManager1.do")
+	public String remarkManager1(String name,String status,String pageNum,String numPerPage,ModelMap map ){
+		String currentPage;
+		if("".equals(pageNum)||pageNum==null){
+			currentPage="1";
+		}else
+			{
+			 currentPage=pageNum;
+			}
+		if(numPerPage == null || "".equals(numPerPage)){
+			numPerPage = "5";
+		}
+		int totalPage=remarkService.findRemarkBySearch(Integer.parseInt(currentPage),Integer.parseInt(numPerPage),name,status).getTotalPages();
+		  long totalCount = remarkService.findRemarkBySearch(Integer.parseInt(currentPage),Integer.parseInt(numPerPage),name,status).getTotalElements();
+		  List<Project> list=remarkService.findRemarkBySearch(Integer.parseInt(currentPage),Integer.parseInt(numPerPage),name,status).getContent();
 		  map.addAttribute("remarklist",list);
 		  map.addAttribute("totalPage",totalPage);
 		  map.addAttribute("totalCount",totalCount);

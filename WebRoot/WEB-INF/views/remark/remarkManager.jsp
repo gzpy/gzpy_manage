@@ -15,22 +15,19 @@
 
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="demo_page1.html" method="post">
+	<form onsubmit="return navTabSearch(this);" action="goRemarkManager1.do" method="post">
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>
 				<td>
-					姓名：<input type="text" name="keyword" />
+					姓名：<input type="text" name="name"/>
 				</td>
 				<td>
-					<select class="combox" name="province">
+					<select class="combox" name="status">
 						<option value="">公开状态</option>
 						<option value="Y">公开留言</option>
 						<option value="N">未公开留言</option>
 					</select>
-				</td>
-				<td>
-					留言日期：<input type="text" class="date" readonly="true" />
 				</td>
 			</tr>
 		</table>
