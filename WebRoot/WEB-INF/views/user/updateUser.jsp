@@ -22,7 +22,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dl>
 					<dt style="text-align: right;">性别：</dt>
 					<dd>
-						<input class="required" name="sex" value="${user.sex }" type="text" size="26" maxlength="50"/>
+						<select class="combox" name="sex">
+							<option value="男">男</option>
+							<option value="女">女</option>
+							
+						</select>
 					</dd>
 				</dl>
 				<dl>
@@ -40,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dl>
 					<dt style="text-align: right;">入职时间：</dt>
 					<dd>
-						<input type="text" name="userEmployDate" class="date required" readonly="true" value="${employDate }"/>
+						<input type="text" name="userEmployDate" class="date" readonly="true" value="${employDate }"/>
 						<a class="inputDateButton" href="javascript:;">选择</a>
 					</dd>
 				</dl>
@@ -48,31 +52,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dl>
 					<dt style="text-align: right;">公司电话：</dt>
 					<dd>
-						<input class="required" name="officePhone" value="${user.officePhone }" type="text" size="26" maxlength="50"/>
+						<input class="phone" name="officePhone" value="${user.officePhone }" type="text" size="26" maxlength="50"/>
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">家庭电话：</dt>
 					<dd>
-						<input class="required" name="homePhone" value="${user.homePhone }" type="text" size="26" maxlength="50"/>
+						<input class="phone" name="homePhone" value="${user.homePhone }" type="text" size="26" maxlength="50"/>
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">手机号码：</dt>
 					<dd>
-						<input class="required" name="mobilePhone" value="${user.mobilePhone }" type="text" size="26" maxlength="50"/>
+						<input class="phone required" name="mobilePhone" value="${user.mobilePhone }" type="text" size="26" maxlength="50"/>
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">电子邮箱：</dt>
 					<dd>
-						<input class="required" name="email" value="${user.email }" type="text" size="26" maxlength="50"/>
+						<input class="email" name="email" value="${user.email }" type="text" size="26" maxlength="50"/>
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">删除状态：</dt>
 					<dd>
-						<input class="required" name="email" value="${user.delStatus }" type="text" size="26" maxlength="50"/>
+						<!-- <input name="delStatus" value="${user.delStatus }" type="text" size="26" maxlength="50"/> -->
+						<select class="combox" name="delStatus" value="${user.delStatus }">
+						<option value="N">N</option>
+						<option value="Y">Y</option>
+						
+						
+						</select>
 					</dd>
 				</dl>
 				

@@ -35,6 +35,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<input name="SEOKeywords" value="${ad.adHeight }" type="text" size="20" maxlength="50" readonly="readonly"/>
 				</dd>
 			</dl>
+			<dl>
+				<dt style="text-align: right;">删除状态：</dt>
+				<dd>
+					<input name="delStatus" value="${ad.delStatus}" type="text" size="20" maxlength="50" readonly="readonly"/>
+				</dd>
+			</dl>
 			<dl class="nowrap">
 				<dt style="text-align: right;">广告描述：</dt>
 				<dd>
