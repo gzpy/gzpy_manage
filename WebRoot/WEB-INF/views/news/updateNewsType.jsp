@@ -17,6 +17,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label style="text-align: right;">文章类型：</label>
 					<input name="typeName" type="text" size="26" value="${newsType.typeName }" maxlength="20" class="required"/>
 				</p>
+				<p>
+					<label style="text-align: right;">删除状态：</label>
+					<c:choose>
+						<c:when test="${newsType.delStatus eq 'Y' }">	
+							<input name="delStatus" type="radio" value="Y" checked="checked"/>Y
+							<input name="delStatus" type="radio" value="N">N
+						</c:when>
+						<c:otherwise>
+							<input name="delStatus" type="radio" value="Y"/>Y
+							<input name="delStatus" type="radio" value="N" checked="checked">N
+						</c:otherwise>
+					</c:choose>
+				</p>
 			</div>
 			<div class="formBar">
 				<ul>

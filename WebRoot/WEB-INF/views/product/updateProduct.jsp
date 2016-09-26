@@ -44,6 +44,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<textarea name="SEODescription" rows="2" cols="30">${product.SEODescription }</textarea>
 					</dd>
 				</dl>
+				<dl>
+					<dt style="text-align: right;">删除状态：</dt>
+					<dd>
+						<c:choose>
+							<c:when test="${product.delStatus eq 'Y' }">	
+								<input name="delStatus" type="radio" value="Y" checked="checked"/>Y
+								<input name="delStatus" type="radio" value="N">N
+							</c:when>
+							<c:otherwise>
+								<input name="delStatus" type="radio" value="Y"/>Y
+								<input name="delStatus" type="radio" value="N" checked="checked">N
+							</c:otherwise>
+						</c:choose>
+					</dd>
+				</dl>
 				<dl class="nowrap">
 					<dt style="text-align: right;">产品简介：</dt>
 					<dd>
