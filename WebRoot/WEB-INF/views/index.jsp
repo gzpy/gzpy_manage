@@ -130,11 +130,4 @@
 	<div id="footer">Copyright &copy; 2016</div></div>
   </body>
 </html>
-<script>
-$(document).ready(function(){
-    if("${currentUser.loginName}"==""){
 
-         window.location.href="gologin.do";
-    }
-})
-</script>

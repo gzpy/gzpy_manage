@@ -76,7 +76,6 @@
 				<td>${remarklist.delStatus}</td>
 				<td>${remarklist.remarkTime}</td>
 				<td>
-					<a title="删除" target="ajaxTodo" href="deleteProject.do?projectId=${item.projectId}" class="btnDel">删除</a>
 					<a title="编辑" target="navTab" href="goEditRemark.do?remarkId=${remarklist.remarkId}" class="btnEdit">编辑</a>
 				</td>
 			</tr>		

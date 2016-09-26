@@ -24,7 +24,7 @@
 		<div class="searchBar">
 			<ul class="searchContent">
 				<li>
-					<label>产品名称：</label>
+					<label>项目名称：</label>
 					<input type="text" name="keywords" value=""/>
 				</li>
 				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
@@ -42,7 +42,7 @@
 		<thead>
 			<tr>
 				<th width="22" align="center"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
-				<th width="50" align="center">产品名称</th>
+				<th width="50" align="center">项目名称</th>
 				<th width="50" align="center">发布日期</th>
 				<th width="50" align="center">操作</th>
 			</tr>

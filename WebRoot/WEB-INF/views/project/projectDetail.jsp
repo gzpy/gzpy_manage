@@ -18,7 +18,7 @@
 			<form method="post"  action="editProject.do?projectId=${project.projectId}" class="pageForm required-validate" onsubmit="return validateCallback(this,navTabAjaxDone);">
 				<div class="pageFormContent nowrap" layoutH="97">
 					<fieldset>
-						<legend>修改项目</legend>
+						<legend>项目详情</legend>
 						<dl>
 							<dt>项目标题：</dt>
 							<dd>
