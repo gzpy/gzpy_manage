@@ -36,7 +36,7 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="${ctx}/user/toAddUser.do" target="dialog" rel="addUser" mask="true" title="添加产品" width="850" height="530" resizable="false"><span>添加产品</span></a></li>
+			<li><a class="add" href="${ctx}/user/toAddUser.do" target="dialog" rel="addUser" mask="true" title="添加用户" width="850" height="530" resizable="false"><span>添加用户</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="80%" layoutH="112">

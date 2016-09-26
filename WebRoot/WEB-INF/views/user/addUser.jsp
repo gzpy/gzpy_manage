@@ -21,7 +21,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dl>
 					<dt style="text-align: right;">性别：</dt>
 					<dd>
-						<input name="sex" type="text" size="26" maxlength="50" value="" />
+					<select class="combox" name="sex">
+						<option value="男">男</option>
+						<option value="女">女</option>
+					</select>
 					</dd>
 				</dl>
 				<dl>
@@ -39,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dl>
 					<dt style="text-align: right;">入职日期：</dt>
 					<dd>
-						<input type="text" name="userEmployDate" class="date required" readonly="true"/>
+						<input type="text" name="userEmployDate" class="date" readonly="true"/>
 						<a class="inputDateButton" href="javascript:;">选择</a>
 					</dd>
 				</dl>
@@ -47,25 +50,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dl>
 					<dt style="text-align: right;">办公电话：</dt>
 					<dd>
-						<input name="officePhone" type="text" size="26" maxlength="50" value="" />
+						<input class="phone" name="officePhone" type="text" size="26" maxlength="50" value="" />
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">家庭电话：</dt>
 					<dd>
-						<input name="homePhone" type="text" size="26" maxlength="50" value="" />
+						<input class="phone" name="homePhone" type="text" size="26" maxlength="50" value="" />
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">手机号码：</dt>
 					<dd>
-						<input class="required" name="mobilePhone" type="text" size="26" maxlength="50" value="" />
+						<input class="phone required" name="mobilePhone" type="text" size="26" maxlength="50" value="" />
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">电子邮箱：</dt>
 					<dd>
-						<input name="email" type="text" size="26" maxlength="50" value="" />
+						<input class="email" name="email" type="text" size="26" maxlength="50" value="" />
 					</dd>
 				</dl>
 				

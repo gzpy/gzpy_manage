@@ -29,13 +29,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dl>
 					<dt style="text-align: right;">广告位宽度：</dt>
 					<dd>
-						<input name="adWidth" type="text" size="26" maxlength="50" value="${ad.adWidth }"/>
+						<input class="number" name="adWidth" type="text" size="26" maxlength="50" value="${ad.adWidth }"/>
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">广告位高度：</dt>
 					<dd>
-						<input name="adHeight" type="text" size="26" maxlength="50" value="${ad.adHeight }"/>
+						<input class="number" name="adHeight" type="text" size="26" maxlength="50" value="${ad.adHeight }"/>
+					</dd>
+				</dl>
+				<dl>
+					<dt style="text-align: right;">删除状态：</dt>
+					<dd>
+						<!-- <input name="delStatus" value="${user.delStatus }" type="text" size="26" maxlength="50"/> -->
+						<select class="combox" name="delStatus" value="${ad.delStatus }">
+						<option value="N">N</option>
+						<option value="Y">Y</option>
+						</select>
 					</dd>
 				</dl>
 				<dl class="nowrap">
