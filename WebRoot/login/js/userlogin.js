@@ -22,34 +22,47 @@ function checkusername() {
 		}
 	}
 	
+	function keyEvent(){
+		document.onkeydown = function(e){
+	    	var ev = document.all ? window.event : e;
+	   		if(ev.keyCode==13) {
+	           login();//处理事件
+	     	}
+		}
+	}
+	
+	function login(){
+		checkusername();
+		checkpassword();
+		var params = {};
+		params.loginName = $("#loginName").val();
+		params.password = $("#password").val();
+		$.ajax({    
+	    url : "login.do",
+		type : "post",
+		data : params,
+		cache : "false",
+		success : function(message) {
+			if(message=="loginerror")
+				$("#checkPas").get(0).innerHTML = "密码错误！";
+			if(message=="logindelstatus")
+				$("#checkPas").get(0).innerHTML = "请联系管理员！";
+			if(message=="success"){
+				window.location.href="goIndex.do"; 
+		     }
+		},
+		error : function(message) {
+			alert(message.message);
+			alert("Connection error");
+			}
+		});	
+	}
+	
 	$(document).ready(function(){
-	    alert("${ctx}");
 		jQuery('#loginName').blur(checkusername);
 	    jQuery('#password').blur(checkpassword);
-		$("#btn").click(function(){
-		 checkusername();
-		 checkpassword();
-			var params = {};
-			params.loginName = $("#loginName").val();
-			params.password = $("#password").val();
-			$.ajax({    
-                url : "login.do",
-				type : "post",
-			    data : params,
-				cache : "false",
-	            success : function(message) {
-	            if(message=="loginerror")
-	                      $("#checkPas").get(0).innerHTML = "密码错误！";
-	            if(message=="logindelstatus")
-	                      $("#checkPas").get(0).innerHTML = "请联系管理员！";
-	            if(message=="success"){
-	                   window.location.href="goIndex.do"; 
-	                      }
-		            	},
-				error : function(message) {
-				alert(message.message);
-						alert("Connection error");
-						}
-			});										
-
-		});});
+	    $("#btn").click(function(){
+	    	login();
+	    });
+	    keyEvent();
+	});
