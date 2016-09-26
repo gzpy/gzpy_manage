@@ -85,4 +85,10 @@ public class RemarkServiceImpl implements RemarkService{
 				Sort.Direction.DESC, "remarkTime"));
 	}
 	
+	public Remark delRemarkById(String remarkId){
+		Remark remark=remarkDao.findOne(remarkId);
+		remark.setDelStatus("Y");
+		return remarkDao.updateRemark(remark);
+	}
+	
 }

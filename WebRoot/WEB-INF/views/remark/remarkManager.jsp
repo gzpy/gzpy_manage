@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form id="pagerForm" method="post" action="${ctx}/goremarkManager.do">
+<form id="pagerForm" method="post" action="${ctx}/goRemarkManager.do">
 	<input type="hidden" name="pageNum" value="${currentPage}" />
 	<input type="hidden" name="numPerPage" value="${numPerPage}" />
 </form>
@@ -73,7 +73,9 @@
 				<td>${remarklist.delStatus}</td>
 				<td>${remarklist.remarkTime}</td>
 				<td>
+				    <a title="删除" target="ajaxTodo" href="delRemark.do?remarkId=${remarklist.remarkId}" class="btndel">删除</a>
 					<a title="编辑" target="navTab" href="goEditRemark.do?remarkId=${remarklist.remarkId}" class="btnEdit">编辑</a>
+					
 				</td>
 			</tr>		
 			

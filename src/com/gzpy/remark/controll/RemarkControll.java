@@ -62,9 +62,9 @@ public class RemarkControll extends BaseController{
 		map.addAttribute("remarkTime",remarkTime);
     	return "remark/editRemark.jsp";
     }
-	
+	//编辑留言
 	@RequestMapping("/editRemark.do")
-	public ModelAndView editProject(Remark remark,String remarktime,ModelMap map){
+	public ModelAndView editRemark(Remark remark,String remarktime,ModelMap map){
 		Date remarkTime = Date.valueOf(remarktime); 
 		remark.setRemarkTime(remarkTime);
 		Remark r=remarkService.updateRemark(remark);
@@ -74,8 +74,17 @@ public class RemarkControll extends BaseController{
 			return this.ajaxDoneSuccess("修改成功", "dlg_page1", "closeCurrent");
 		}
 	}
-	
-	//delstatsu
+	//删除留言
+	@RequestMapping("/delRemark.do")
+	public ModelAndView DelRemark(String remarkId,ModelMap map){
+		Remark r=remarkService.delRemarkById(remarkId);
+		if(r == null || "".equals(r)){
+			return this.ajaxDoneError("删除失败,请重新删除！");
+		} else {
+			return this.ajaxDoneSuccess("删除成功！");
+		}
+	}
+
 	@RequestMapping("/goRemarkManager.do")
 	public String remarkManager(String pageNum,String numPerPage,ModelMap map ){
 		String currentPage;
