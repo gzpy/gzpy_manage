@@ -46,7 +46,7 @@
 		<div id="header">
 			<div class="headerNav">
 				<ul class="nav">
-					<li><a href="#">退出</a></li>
+					<li><a href="gologin.do">退出</a></li>
 				</ul>
 				<ul class="themeList" id="themeList">
 					<li theme="default"><div class="selected">蓝色</div></li>
@@ -87,8 +87,7 @@
 							
 							<li><a>留言管理</a>
 								<ul>
-									<li><a href="w_panel.html" target="navTab" rel="w_panel">添加留言</a></li>
-									<li><a href="w_panel.html" target="navTab" rel="w_panel">管理留言</a></li>
+									<li><a href="${ctx}/goRemarkManager.do" target="navTab" rel="dlg_page1">管理留言</a></li>
 								</ul>
 							</li>
 							
@@ -131,3 +130,11 @@
 	<div id="footer">Copyright &copy; 2016</div></div>
   </body>
 </html>
+<script>
+$(document).ready(function(){
+    if("${currentUser.loginName}"==""){
+
+         window.location.href="gologin.do";
+    }
+})
+</script>

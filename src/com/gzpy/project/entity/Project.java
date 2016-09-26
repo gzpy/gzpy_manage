@@ -11,8 +11,7 @@ import javax.persistence.Id;
 public class Project {
 	@Column
 	@Id
-	@GeneratedValue
-	int projectId;
+	String projectId;
 	@Column
 	String projectTitle;
 	@Column
@@ -22,94 +21,76 @@ public class Project {
 	@Column
 	String imagePath;
 	@Column
-	String Isdelete;
-	@Column
-	int Uid;
-	@Column
 	String SEOTitle;
 	@Column
 	String SEOKeywords;
 	@Column
-	String SEODescribtion;
-
-	public int getProjectId() {
+	String SEODescription;
+	@Column
+    String userId;
+    @Column
+    String delStatus;
+	public String getProjectId() {
 		return projectId;
 	}
-
-	public void setProjectId(int projectId) {
+	public void setProjectId(String projectId) {
 		this.projectId = projectId;
 	}
-
 	public String getProjectTitle() {
 		return projectTitle;
 	}
-
 	public void setProjectTitle(String projectTitle) {
 		this.projectTitle = projectTitle;
 	}
-
 	public Date getIssueDate() {
 		return issueDate;
 	}
-
 	public void setIssueDate(Date issueDate) {
 		this.issueDate = issueDate;
 	}
-
 	public String getIntroduction() {
 		return introduction;
 	}
-
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}
-
 	public String getImagePath() {
 		return imagePath;
 	}
-
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
-
-	public String getIsdelete() {
-		return Isdelete;
-	}
-
-	public void setIsdelete(String isdelete) {
-		Isdelete = isdelete;
-	}
-
-	public int getUid() {
-		return Uid;
-	}
-
-	public void setUid(int uid) {
-		Uid = uid;
-	}
-
 	public String getSEOTitle() {
 		return SEOTitle;
 	}
-
 	public void setSEOTitle(String sEOTitle) {
 		SEOTitle = sEOTitle;
 	}
-
 	public String getSEOKeywords() {
 		return SEOKeywords;
 	}
-
 	public void setSEOKeywords(String sEOKeywords) {
 		SEOKeywords = sEOKeywords;
 	}
-
-	public String getSEODescribtion() {
-		return SEODescribtion;
+    public String getSEODescription() {
+			return SEODescription;
+		}
+    public void setSEODescription(String sEODescription) {
+			SEODescription = sEODescription;
+		}
+	public String getUserId() {
+		return userId;
 	}
-
-	public void setSEODescribtion(String sEODescribtion) {
-		SEODescribtion = sEODescribtion;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
+	public String getDelStatus() {
+		return delStatus;
+	}
+	public void setDelStatus(String delStatus) {
+		this.delStatus = delStatus;
+	}
+	
+	
 
 }
