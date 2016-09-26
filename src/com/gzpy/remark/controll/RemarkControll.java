@@ -1,6 +1,7 @@
 package com.gzpy.remark.controll;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -53,8 +54,11 @@ public class RemarkControll extends BaseController{
 	//跳转编辑留言界面
 	@RequestMapping("/goEditRemark.do")
     public String goEditRemarkView(String remarkId,ModelMap map){
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
 		Remark remark=remarkService.findRemarkById(remarkId);
+		String remarkTime= dateFormat.format(remark.getRemarkTime());
 		map.addAttribute("remark",remark);
+		map.addAttribute("remarkTime",remarkTime);
     	return "remark/editRemark.jsp";
     }
 	
@@ -62,7 +66,6 @@ public class RemarkControll extends BaseController{
 	public ModelAndView editProject(Remark remark,String remarktime,ModelMap map){
 		Date remarkTime = Date.valueOf(remarktime); 
 		remark.setRemarkTime(remarkTime);
-
 		Remark r=remarkService.updateRemark(remark);
 		if(r == null || "".equals(r)){
 			return this.ajaxDoneError("修改失败,请重新修改！");

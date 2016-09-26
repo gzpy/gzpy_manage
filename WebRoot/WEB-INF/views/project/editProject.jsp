@@ -28,7 +28,7 @@
 						<dl>
 							<dt>发表时间：</dt>
 							<dd>
-								<input name="PushDate" type="text" value="${project.issueDate}" class="date required" />
+								<input name="PushDate" type="text" value="${issueDate}" readonly="true" class="date required" />
 							</dd>
 						</dl>
 						<dl>

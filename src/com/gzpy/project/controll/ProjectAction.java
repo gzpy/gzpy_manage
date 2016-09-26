@@ -1,6 +1,7 @@
 package com.gzpy.project.controll;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -70,9 +71,11 @@ public class ProjectAction extends BaseController{
 	//跳转至修改页面
 	@RequestMapping("/goEditProject.do")
 	public String goEditView(String projectId,ModelMap map)
-	{  
+	{  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
 	    Project project=projectService.findProjectById(projectId);
+	    String issueDate=dateFormat.format(project.getIssueDate());
 		map.addAttribute("project",project);
+		map.addAttribute("issueDate", issueDate);
 		return "project/editProject.jsp";
 	
 	}

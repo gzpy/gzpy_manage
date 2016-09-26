@@ -40,7 +40,7 @@
 						<dl style="text-align: center;">
 							<dt>留言时间：</dt>
 							<dd>
-								<input name="remarktime" type="text" class="required date" value="${remark.remarkTime}" />
+								<input name="remarktime" type="text" class="required date" value="${remarkTime}" />
 							</dd>
 						</dl>
 						<dl style="margin-left:30px">
