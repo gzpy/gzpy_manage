@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dl>
 					<dt style="text-align: right;">用户姓名：</dt>
 					<dd>
-						<input class="required" value="" name="userName" type="text" size="26" maxlength="50"/>
+						<input class="required" value="" name="userName" type="text" size="26" maxlength="64"/>
 					</dd>
 				</dl>
 				<dl>
@@ -30,13 +30,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dl>
 					<dt style="text-align: right;">登录账号：</dt>
 					<dd>
-						<input class="required" name="loginName" type="text" size="26" maxlength="50" value="" />
+						<input class="required" name="loginName" type="text" size="26" maxlength="32" value="" />
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">登录密码：</dt>
 					<dd>
-						<input class="required" name="password" type="text" size="26" maxlength="50" value="" />
+						<input class="required" name="password" type="text" size="26" maxlength="64" value="" />
 					</dd>
 				</dl>
 				<dl>
@@ -50,25 +50,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dl>
 					<dt style="text-align: right;">办公电话：</dt>
 					<dd>
-						<input class="phone" name="officePhone" type="text" size="26" maxlength="50" value="" />
+						<input class="phone" name="officePhone" type="text" size="26" maxlength="32" value="" />
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">家庭电话：</dt>
 					<dd>
-						<input class="phone" name="homePhone" type="text" size="26" maxlength="50" value="" />
+						<input class="phone" name="homePhone" type="text" size="26" maxlength="32" value="" />
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">手机号码：</dt>
 					<dd>
-						<input class="phone required" name="mobilePhone" type="text" size="26" maxlength="50" value="" />
+						<input class="phone required" name="mobilePhone" type="text" size="26" maxlength="11" value="" />
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">电子邮箱：</dt>
 					<dd>
-						<input class="email" name="email" type="text" size="26" maxlength="50" value="" />
+						<input class="email" name="email" type="text" size="26" maxlength="64" value="" />
 					</dd>
 				</dl>
 				

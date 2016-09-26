@@ -21,26 +21,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dl>
 					<dt style="text-align: right;">广告位排序：</dt>
 					<dd>
-						<input name="adOrder" type="text" size="26" maxlength="50" value=""/>
+						<input name="adOrder" type="text" size="26" maxlength="10" value=""/>
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">广告位宽度：</dt>
 					<dd>
-						<input class="number" name="adWidth" type="text" size="26" maxlength="50" value=""/>
+						<input class="number" name="adWidth" type="text" size="26" maxlength="10" value=""/>
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">广告位高度：</dt>
 					<dd>
-						<input name="adHeight" type="text" class="number" size="26" maxlength="50" value=""/>
+						<input name="adHeight" type="text" class="number" size="26" maxlength="10" value=""/>
 					</dd>
 				</dl>
 				
 				<dl class="nowrap">
 					<dt style="text-align: right;">广告描述：</dt>
 					<dd>
-						<textarea class="editor" name="adDescription" rows="12" cols="80" tools="mfull"></textarea>
+						<textarea class="editor" name="adDescription" rows="12" cols="80" tools="mfull" maxlength="300"></textarea>
 					</dd>
 				</dl>
 			</div>

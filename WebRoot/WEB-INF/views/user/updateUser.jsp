@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dl>
 					<dt style="text-align: right;">用户姓名：</dt>
 					<dd>
-						<input class="required" name="userName" value="${user.userName }" type="text" size="26" maxlength="50"/>
+						<input class="required" name="userName" value="${user.userName }" type="text" size="26" maxlength="64"/>
 					</dd>
 				</dl>
 				<dl>
@@ -32,13 +32,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dl>
 					<dt style="text-align: right;">登录账号：</dt>
 					<dd>
-						<input class="required" name="loginName" value="${user.loginName }" type="text" size="26" maxlength="50"/>
+						<input class="required" name="loginName" value="${user.loginName }" type="text" size="26" maxlength="32"/>
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">登录密码：</dt>
 					<dd>
-						<input class="required" name="password" value="${user.password }" type="text" size="26" maxlength="50"/>
+						<input class="required" name="password" value="${user.password }" type="text" size="26" maxlength="64"/>
 					</dd>
 				</dl>
 				<dl>
@@ -52,31 +52,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dl>
 					<dt style="text-align: right;">公司电话：</dt>
 					<dd>
-						<input class="phone" name="officePhone" value="${user.officePhone }" type="text" size="26" maxlength="50"/>
+						<input class="phone" name="officePhone" value="${user.officePhone }" type="text" size="26" maxlength="32"/>
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">家庭电话：</dt>
 					<dd>
-						<input class="phone" name="homePhone" value="${user.homePhone }" type="text" size="26" maxlength="50"/>
+						<input class="phone" name="homePhone" value="${user.homePhone }" type="text" size="26" maxlength="32"/>
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">手机号码：</dt>
 					<dd>
-						<input class="phone required" name="mobilePhone" value="${user.mobilePhone }" type="text" size="26" maxlength="50"/>
+						<input class="phone required" name="mobilePhone" value="${user.mobilePhone }" type="text" size="26" maxlength="11"/>
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">电子邮箱：</dt>
 					<dd>
-						<input class="email" name="email" value="${user.email }" type="text" size="26" maxlength="50"/>
+						<input class="email" name="email" value="${user.email }" type="text" size="26" maxlength="64"/>
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">删除状态：</dt>
 					<dd>
-						<!-- <input name="delStatus" value="${user.delStatus }" type="text" size="26" maxlength="50"/> -->
+						<!-- <input name="delStatus" value="${user.delStatus }" type="text" size="26" /> -->
 						<select class="combox" name="delStatus" value="${user.delStatus }">
 						<option value="N">N</option>
 						<option value="Y">Y</option>

@@ -20,25 +20,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<dl>
 				<dt style="text-align: right;">广告排序：</dt>
 				<dd>
-					<input name="SEOKeywords" value="${ad.adOrder }" type="text" size="20" maxlength="50" readonly="readonly"/>
+					<input name="SEOKeywords" value="${ad.adOrder }" type="text" size="20" maxlength="10" readonly="readonly"/>
 				</dd>
 			</dl>
 			<dl>
 				<dt style="text-align: right;">广告宽度：</dt>
 				<dd>
-					<input name="SEOKeywords" value="${ad.adWidth }" type="text" size="20" maxlength="50" readonly="readonly"/>
+					<input name="SEOKeywords" value="${ad.adWidth }" type="text" size="20" maxlength="10" readonly="readonly"/>
 				</dd>
 			</dl>
 			<dl>
 				<dt style="text-align: right;">广告高度：</dt>
 				<dd>
-					<input name="SEOKeywords" value="${ad.adHeight }" type="text" size="20" maxlength="50" readonly="readonly"/>
+					<input name="SEOKeywords" value="${ad.adHeight }" type="text" size="20" maxlength="10" readonly="readonly"/>
 				</dd>
 			</dl>
 			<dl>
 				<dt style="text-align: right;">删除状态：</dt>
 				<dd>
-					<input name="delStatus" value="${ad.delStatus}" type="text" size="20" maxlength="50" readonly="readonly"/>
+					<input name="delStatus" value="${ad.delStatus}" type="text" size="20" maxlength="1" readonly="readonly"/>
 				</dd>
 			</dl>
 			<dl class="nowrap">
