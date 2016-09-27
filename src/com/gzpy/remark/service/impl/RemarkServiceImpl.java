@@ -71,7 +71,7 @@ public class RemarkServiceImpl implements RemarkService{
 				//Path<String> remarkTime=root.get("remarkTime");
 				Path<String> remarkstatus=root.get("status");
 				 Predicate isDelStatus=cb.equal(delStatus, "N");
-				 Predicate searchRemarkName=(cb.like(remarkname,"%"+name+"%"));
+				 Predicate searchRemarkName=cb.like(remarkname,"%"+name+"%");
 				// Predicate searchRemarkTime=cb.equal(remarkTime, remark.getRemarkTime());
 				 Predicate searchStatus=cb.like(remarkstatus,"%"+status+"%");
 				 query.where(cb.and(isDelStatus,searchRemarkName,searchStatus));  

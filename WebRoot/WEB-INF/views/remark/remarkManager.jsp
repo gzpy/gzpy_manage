@@ -15,7 +15,7 @@
 
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="goRemarkManager1.do" method="post">
+	<form onsubmit="return navTabSearch(this);" action="${ctx}/goRemarkManager1.do" method="post">
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>
@@ -24,7 +24,7 @@
 				</td>
 				<td>
 					<select class="combox" name="status">
-						<option value="">公开状态</option>
+						<option value="%">公开状态</option>
 						<option value="Y">公开留言</option>
 						<option value="N">未公开留言</option>
 					</select>

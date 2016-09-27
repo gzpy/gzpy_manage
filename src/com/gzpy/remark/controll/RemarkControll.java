@@ -111,6 +111,7 @@ public class RemarkControll extends BaseController{
 	
 	@RequestMapping("/goRemarkManager1.do")
 	public String remarkManager1(String name,String status,String pageNum,String numPerPage,ModelMap map ){
+		System.out.println(name+""+status);
 		String currentPage;
 		if("".equals(pageNum)||pageNum==null){
 			currentPage="1";

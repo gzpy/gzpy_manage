@@ -30,7 +30,7 @@ public class ProjectServiceImpl implements ProjectService {
 	ProjectDao projectDao;
 
 	// 分页查询
-	public Page findProject(int currentpage, int size) {
+	/*public Page findProject(int currentpage, int size) {
 		Specification<Project> spec = new Specification<Project>() {
 			public Predicate toPredicate(Root<Project> root,
 					CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -41,8 +41,24 @@ public class ProjectServiceImpl implements ProjectService {
 				Sort.Direction.DESC, "issueDate");
 		Page page = projectDao.findAll(pb);
 		return page;
+	}*/
+//查询状态为N的项目
+    public Page findProject(int currentpage, int size) {
+	Specification<Project> spec = new Specification<Project>() {
+		public Predicate toPredicate(Root<Project> root,
+				CriteriaQuery<?> query, CriteriaBuilder cb) {
+			   Path<String> delStatus=root.get("delStatus");
+			   Predicate isdelStatus=cb.equal(delStatus,"N");
+			   query.where(cb.equal(delStatus,"N"));  
+				return query.getRestriction();  
+		}
+	};
+	Pageable pb = new PageRequest(currentpage - 1, size,
+			Sort.Direction.DESC, "issueDate");
+	Page page = projectDao.findAll(spec,pb);
+	return page;
 	}
-
+	
 	// 通过id查询项目
 	public Project findProjectById(String projectId) {
 		return projectDao.findProjectById(projectId);
@@ -68,8 +84,10 @@ public class ProjectServiceImpl implements ProjectService {
 			public Predicate toPredicate(Root<Project> root,
 					CriteriaQuery<?> query, CriteriaBuilder cb) {
 				Path<String> title=root.get("projectTitle");
+				Path<String> delStatus=root.get("delStatus");
 				 Predicate searchTitle=cb.like(title, "%"+projectTitle+"%");
-				 query.where(cb.and(searchTitle));  
+				 Predicate isdelStatus=cb.equal(delStatus,"N");
+				 query.where(cb.and(searchTitle,isdelStatus));  
 				return query.getRestriction();  
 			}
 		};
