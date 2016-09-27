@@ -36,7 +36,7 @@
 	<div class="panelBar">
 		<ul class="toolBar">
 			<li><a class="add" href="${ctx}/advert/toAddAd.do" target="dialog" rel="addAd" mask="true" title="添加广告" width="850" height="530" resizable="false"><span>添加广告</span></a></li>
-			<li><a class="add" href="${ctx}/advert/deleteSelectUser.do?String[]=${ids}" target="dialog" rel="addAd" mask="true" title="添加广告" width="850" height="530" resizable="false"><span>批量删除</span></a></li>
+			<li><a class="delete" href="${ctx}/advert/deleteAds.do" target="selectedToDo" rel="ids" title="是否修改所选项？" width="850" height="530" resizable="false"><span>批量修改删除状态</span></a></li>
 		</ul>
 	</div>
 	<form action="">

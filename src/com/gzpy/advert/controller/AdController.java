@@ -2,6 +2,8 @@ package com.gzpy.advert.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gzpy.advert.entity.Ad;
 import com.gzpy.advert.service.AdService;
 import com.gzpy.common.BaseController;
-
 import com.gzpy.util.GenerateGUID;
 
 @Controller
@@ -76,8 +77,7 @@ public class AdController extends BaseController {
 		if (result == null || "".equals(result)) {
 			return this.ajaxDoneError("添加失败,请重新添加！");
 		} else {
-			return this
-					.ajaxDoneSuccess("添加成功", "adManage", "closeCurrent");
+			return this.ajaxDoneSuccess("添加成功", "adManage", "closeCurrent");
 		}
 	}
 
@@ -133,14 +133,16 @@ public class AdController extends BaseController {
 
 	// 查看广告详情
 	@RequestMapping("/toAdDetail.do")
-	public String toAdDetail(String id ,ModelMap map) {
-		Ad ad=adService.findAdById(id);
-		map.addAttribute("ad",ad);
+	public String toAdDetail(String id, ModelMap map) {
+		Ad ad = adService.findAdById(id);
+		map.addAttribute("ad", ad);
 		return "advert/adDetail.jsp";
 	}
-	//根据广告名称查询广告
+
+	// 根据广告名称查询广告
 	@RequestMapping("/findAdByName.do")
-	public String findAdByName(String pageNum, String numPerPage,String inputName,ModelMap map){
+	public String findAdByName(String pageNum, String numPerPage,
+			String inputName, ModelMap map) {
 		if (pageNum == null || "".equals(pageNum)) {
 			currentPage = 1;
 		} else {
@@ -152,27 +154,33 @@ public class AdController extends BaseController {
 		} else {
 			pageSize = Integer.parseInt(numPerPage);
 		}
-		int totalPage = adService.findAdByName(inputName,currentPage, pageSize)
-				.getTotalPages();
-		long totalCount = adService.findAdByName(inputName,currentPage, pageSize)
-				.getTotalElements();
-		List<Ad> list_ad = adService.findAdByName(inputName,currentPage, pageSize)
-				.getContent();
-		map.addAttribute("list_ad",list_ad);
-		  map.addAttribute("totalPage",totalPage);
-		  map.addAttribute("totalCount",totalCount);
-		  map.addAttribute("numPerPage", numPerPage);
-		  map.addAttribute("currentPage", currentPage);
-		  return "advert/adList.jsp";
+		int totalPage = adService
+				.findAdByName(inputName, currentPage, pageSize).getTotalPages();
+		long totalCount = adService.findAdByName(inputName, currentPage,
+				pageSize).getTotalElements();
+		List<Ad> list_ad = adService.findAdByName(inputName, currentPage,
+				pageSize).getContent();
+		map.addAttribute("list_ad", list_ad);
+		map.addAttribute("totalPage", totalPage);
+		map.addAttribute("totalCount", totalCount);
+		map.addAttribute("numPerPage", numPerPage);
+		map.addAttribute("currentPage", currentPage);
+		return "advert/adList.jsp";
 	}
-	//批量删除广告
-	@RequestMapping("/deleteSelectUser.do")
-	public ModelAndView deleteSelectUser(String[] ids){
-		for(int i=0;i<=ids.length;i++){
-			String id=ids[i];
-			System.out.println(id);
+
+	// 批量修改删除状态
+	@RequestMapping("/deleteAds.do")
+	public ModelAndView deleteSelectUser(HttpServletRequest request){
+		String[] ids=request.getParameterValues("ids");
+		try{for(String id : ids ){
+			Ad ad=adService.findAdById(id);
+			ad.setDelStatus("Y");
+			adService.saveAd(ad);
+			}
+		return this.ajaxDoneSuccess("修改删除状态成功", "adManage", "");
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-		return null;
-		
-	}
+		return this.ajaxDoneError("修改删除状态失败");
+		}
 }

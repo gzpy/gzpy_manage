@@ -37,7 +37,7 @@
 	<div class="panelBar">
 		<ul class="toolBar">
 			<li><a class="add" href="${ctx}/user/toAddUser.do" target="dialog" rel="addUser" mask="true" title="添加用户" width="850" height="530" resizable="false"><span>添加用户</span></a></li>
-			<li><a class="add" href="${ctx}/user/toAddUser.do" target="dialog" rel="addUser" mask="true" title="添加用户" width="850" height="530" resizable="false"><span>批量删除</span></a></li>
+			<li><a class="delete" href="${ctx}/user/deleteUsers.do" target="selectedToDo" mask="true" rel="ids" title="是否修改所选项？" width="850" height="530" resizable="false"><span>批量修改删除状态</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="80%" layoutH="112">
@@ -56,7 +56,7 @@
 		<tbody>
 			<c:forEach items="${list_user}" var="user" varStatus="idx">
 				<tr>
-				 <td><input name="ids" value="xxx" type="checkbox"></td>
+				 <td><input name="ids" value="${user.userId }" type="checkbox"></td>
 					<td align="center">${idx.index + (pageSize*(currentPage-1))+1}</td>
 					<td>${user.userName}</td>
 					<td>${user.mobilePhone}</td>
