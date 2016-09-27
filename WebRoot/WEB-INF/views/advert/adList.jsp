@@ -62,8 +62,8 @@
 
 					<td>
 						<a title="删除" target="ajaxTodo" href="${ctx }/advert/deleteAd.do?id=${ad.id}" class="btnDel">删除</a>
-						<a title="编辑" target="dialog" href="${ctx}/advert/toUpdateAd.do?id=${ad.id}" mask="true" title="编辑广告" width="850" height="530" class="btnEdit">编辑</a>
-						<a title="查看详情" target="dialog" href="${ctx}/advert/toAdDetail.do?id=${ad.id}" mask="true" title="查看详情" width="850" height="530" class="btnView">查看详情</a>
+						<a title="编辑" target="navTab" href="${ctx}/advert/toUpdateAd.do?id=${ad.id}" mask="true" title="编辑广告" width="850" height="530" class="btnEdit">编辑</a>
+						<a title="查看详情" target="navTab" href="${ctx}/advert/toAdDetail.do?id=${ad.id}" mask="true" title="查看详情" width="850" height="530" class="btnView">查看详情</a>
 					</td>
 				</tr>
 			</c:forEach>

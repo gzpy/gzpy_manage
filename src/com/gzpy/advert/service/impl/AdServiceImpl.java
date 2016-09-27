@@ -29,7 +29,7 @@ public class AdServiceImpl implements AdService {
 	@Override
 	public Page<Ad> findAdByCurrentPage(int currentPage, int pageSize) {
 		Pageable pb = new PageRequest(currentPage - 1, pageSize,
-				Sort.Direction.ASC, "Id");
+				Sort.Direction.ASC, "adOrder");
 		Page<Ad> page = adDao.findAll(pb);
 
 		return page;

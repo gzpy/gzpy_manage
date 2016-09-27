@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dl>
 					<dt style="text-align: right;">入职时间：</dt>
 					<dd>
-						<input type="text" name="userEmployDate" class="date" readonly="true" value="${employDate }"/>
+						<input type="text" name="userEmployDate" class="date required" readonly="true" value="${employDate }"/>
 						<a class="inputDateButton" href="javascript:;">选择</a>
 					</dd>
 				</dl>

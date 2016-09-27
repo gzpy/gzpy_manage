@@ -1,13 +1,20 @@
 package com.gzpy.advert.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gzpy.advert.entity.Ad;
@@ -66,8 +73,42 @@ public class AdController extends BaseController {
 
 	// 在数据库中添加广告
 	@RequestMapping("/addAd.do")
-	public ModelAndView addAd(Ad ad, String adWidth, String adHeight,
-			String adOrder) {
+	public ModelAndView addAd(HttpServletRequest request,MultipartFile ad_pic,Ad ad, String adWidth, String adHeight,
+			String adOrder) throws Exception {
+		// 转型为MultipartHttpRequest：   
+        //MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;   
+     // 获得文件：   
+       // MultipartFile ad_pic = multipartRequest.getFile("ad_pic");   
+		// 图片原始名称
+		String originalFilename = ad_pic.getOriginalFilename();
+		// 获得项目的路径
+				ServletContext sc = request.getSession().getServletContext();
+
+		System.out.println(originalFilename);
+		// 上传图片
+		if (ad_pic != null && originalFilename != null
+				&& originalFilename.length() > 0) {
+
+			// 存储图片的路径
+			String pic_path =sc.getRealPath("/upload/advert") + "/";
+			//System.out.println(pic_path);
+			// 新的图片名称
+			String newFileName = UUID.randomUUID()
+					+ originalFilename.substring(originalFilename
+							.lastIndexOf("."));
+			// 新图片
+			
+			File newFile = new File(pic_path + newFileName);
+			if(!newFile.exists()){
+				newFile.mkdirs();
+			}
+			
+			// 将内存中的数据写入磁盘
+			ad_pic.transferTo(newFile);
+
+			// 将新图片名称写到ad中
+			ad.setImagePath(newFileName);
+		}
 		ad.setAdHeight(Integer.parseInt(adHeight));
 		ad.setAdWidth(Integer.parseInt(adWidth));
 		ad.setAdOrder(Integer.parseInt(adOrder));
@@ -170,17 +211,18 @@ public class AdController extends BaseController {
 
 	// 批量修改删除状态
 	@RequestMapping("/deleteAds.do")
-	public ModelAndView deleteSelectUser(HttpServletRequest request){
-		String[] ids=request.getParameterValues("ids");
-		try{for(String id : ids ){
-			Ad ad=adService.findAdById(id);
-			ad.setDelStatus("Y");
-			adService.saveAd(ad);
+	public ModelAndView deleteSelectUser(HttpServletRequest request) {
+		String[] ids = request.getParameterValues("ids");
+		try {
+			for (String id : ids) {
+				Ad ad = adService.findAdById(id);
+				ad.setDelStatus("Y");
+				adService.saveAd(ad);
 			}
-		return this.ajaxDoneSuccess("修改删除状态成功", "adManage", "");
-		}catch(Exception e){
+			return this.ajaxDoneSuccess("修改删除状态成功", "adManage", "");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return this.ajaxDoneError("修改删除状态失败");
-		}
+	}
 }
