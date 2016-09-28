@@ -4,14 +4,17 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+
+
 import com.gzpy.common.BaseController;
-import com.gzpy.product.entity.Product;
 import com.gzpy.user.entity.User;
 import com.gzpy.user.service.UserService;
 import com.gzpy.util.GenerateGUID;
@@ -134,6 +137,50 @@ public String toUpdateUser(String userId,ModelMap map){
 		map.addAttribute("user",user);
 		
 		return "/user/userDetail.jsp";
+		
+	}
+	//根据用户姓名查询用户
+	@RequestMapping("/findUserByName.do")
+	public String findUserByName(String pageNum, String numPerPage, String inputName, ModelMap map){
+		if (pageNum == null || "".equals(pageNum)) {
+			currentPage = 1;
+		} else {
+			currentPage = Integer.parseInt(pageNum);
+		}
+
+		if (numPerPage == null || "".equals(numPerPage)) {
+			pageSize = 5;
+		} else {
+			pageSize = Integer.parseInt(numPerPage);
+		}
+		int totalPage = userService.findUserByName(inputName,currentPage, pageSize)
+				.getTotalPages();
+		long totalCount = userService.findUserByName(inputName,currentPage, pageSize)
+				.getTotalElements();
+		List<User> list_user = userService.findUserByName(inputName,currentPage, pageSize)
+				.getContent();
+		map.addAttribute("list_user",list_user);
+		  map.addAttribute("totalPage",totalPage);
+		  map.addAttribute("totalCount",totalCount);
+		  map.addAttribute("numPerPage", numPerPage);
+		  map.addAttribute("currentPage", currentPage);
+		  return "user/userList.jsp";
+	}
+	//批量修改删除状态
+	@RequestMapping("/deleteUsers.do")
+	public ModelAndView deleteUsers(HttpServletRequest request){
+		String[] ids=request.getParameterValues("ids");
+		try {
+			for(String userId : ids){
+				User user=userService.findUserById(userId);
+				user.setDelStatus("Y");
+				userService.saveUser(user);
+			}
+			return this.ajaxDoneSuccess("修改删除状态成功", "adManage", "");
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
+		return this.ajaxDoneError("修改删除状态失败");
 		
 	}
 }

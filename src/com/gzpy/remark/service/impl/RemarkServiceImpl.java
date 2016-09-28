@@ -71,18 +71,21 @@ public class RemarkServiceImpl implements RemarkService{
 				//Path<String> remarkTime=root.get("remarkTime");
 				Path<String> remarkstatus=root.get("status");
 				 Predicate isDelStatus=cb.equal(delStatus, "N");
-				 Predicate searchRemarkName=(cb.like(remarkname,"%"+name+"%"));
+				 Predicate searchRemarkName=cb.like(remarkname,"%"+name+"%");
 				// Predicate searchRemarkTime=cb.equal(remarkTime, remark.getRemarkTime());
-				 Predicate searchStatus=cb.equal(remarkstatus,status);
-				 if(status==""){
-					 query.where(cb.and(isDelStatus,searchRemarkName));  
-				 }else
+				 Predicate searchStatus=cb.like(remarkstatus,"%"+status+"%");
 				 query.where(cb.and(isDelStatus,searchRemarkName,searchStatus));  
 				return query.getRestriction();  
 			}
 		};
 		return remarkDao.findAll(spec,new PageRequest(currentpage - 1, size,
 				Sort.Direction.DESC, "remarkTime"));
+	}
+	
+	public Remark delRemarkById(String remarkId){
+		Remark remark=remarkDao.findOne(remarkId);
+		remark.setDelStatus("Y");
+		return remarkDao.updateRemark(remark);
 	}
 	
 }

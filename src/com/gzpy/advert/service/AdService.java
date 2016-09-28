@@ -41,6 +41,10 @@ public interface AdService {
 	public void deleteAd(String id);
 
 
+//根据广告名称查询广告
+	public Page<Ad> findAdByName(final String inputName,int currentPage, int pageSize);
+
+
 
 	
 }

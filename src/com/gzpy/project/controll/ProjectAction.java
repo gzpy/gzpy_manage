@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.messaging.simp.user.UserSessionRegistry;
 import org.springframework.stereotype.Controller;
@@ -82,8 +83,11 @@ public class ProjectAction extends BaseController{
 	//删除项目
 	@RequestMapping("/deleteProject.do")
 	public ModelAndView deleteProject(String projectId,ModelMap map){
-		int i=projectService.deleteProject(projectId);
-		if(i<1){
+		Project project;
+		 project=projectService.findProjectById(projectId);
+	     project.setDelStatus("Y");
+	     project=projectService.updateProject(project);
+		if(project==null||"".equals(project)){
 			return this.ajaxDoneError("删除失败,请重新添加！");
 		} else {
 			return this.ajaxDoneSuccess("删除成功");
@@ -94,6 +98,7 @@ public class ProjectAction extends BaseController{
 	public ModelAndView editProject(Project project,String PushDate,ModelMap map){
 		Date issueDate = Date.valueOf(PushDate); 
 		project.setIssueDate(issueDate);
+		project.setDelStatus("N");
 		Project p=projectService.updateProject(project);
 		if(p == null || "".equals(p)){
 			return this.ajaxDoneError("修改失败,请重新修改！");
@@ -109,4 +114,47 @@ public class ProjectAction extends BaseController{
 		return "project/projectDetail.jsp";
 	
 	}
+	//检索
+	@RequestMapping("/searchProject.do")
+	  public String searchProject(String pageNum,String numPerPage,String projectTitle,ModelMap map){
+		System.out.println(projectTitle);
+		String currentPage;
+		  if(pageNum==null){
+		     currentPage="1";
+		  }else{
+			  currentPage=pageNum;
+		  }
+		  if(numPerPage == null || "".equals(numPerPage)){
+				numPerPage = "5";
+			} 
+		  int totalPage=projectService.findProjectBySearch(Integer.parseInt(currentPage),Integer.parseInt(numPerPage),projectTitle).getTotalPages();
+		  long totalCount = projectService.findProjectBySearch(
+					Integer.parseInt(currentPage), Integer.parseInt(numPerPage),projectTitle).getTotalElements();
+		  List<Project> list=projectService.findProjectBySearch(Integer.parseInt(currentPage), Integer.parseInt(numPerPage),projectTitle).getContent();
+		  map.addAttribute("list",list);
+		  map.addAttribute("totalPage",totalPage);
+		  map.addAttribute("totalCount",totalCount);
+		  map.addAttribute("numPerPage", numPerPage);
+		  map.addAttribute("currentPage", currentPage);
+		  map.addAttribute("projectTitle",projectTitle);
+		  return "project/project.jsp";
+	  }
+	
+	@RequestMapping("/deleteAll.do")
+	public ModelAndView deleteAll(HttpServletRequest request){
+		String id[]=request.getParameterValues("ids");
+		Project project = null;
+		for(String projectId:id){
+			 project=projectService.findProjectById(projectId);
+			project.setDelStatus("Y");
+			project=projectService.updateProject(project);
+		}
+		
+		if(project==null||"".equals(project)){
+			return this.ajaxDoneError("删除失败,请重新添加！");
+		} else {
+			return this.ajaxDoneSuccess("删除成功");
+		}
+	}
+	
 }

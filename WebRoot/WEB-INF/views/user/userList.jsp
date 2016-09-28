@@ -17,13 +17,13 @@
 	</form>
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="" method="post">
+	<form onsubmit="return navTabSearch(this);" action="${ctx }/user/findUserByName.do" method="post">
 		<div class="searchBar">
 			<table class="searchContent">
 				<tr>
 					<td>
 						<label>用户姓名：</label>
-						<input type="text" name="keywords" value=""/>
+						<input type="text" name="inputName" value=""/>
 					</td>
 					<td>
 						<div class="buttonActive"><div class="buttonContent"><button type="submit">&nbsp;&nbsp;检索&nbsp;&nbsp;</button></div></div>
@@ -37,12 +37,13 @@
 	<div class="panelBar">
 		<ul class="toolBar">
 			<li><a class="add" href="${ctx}/user/toAddUser.do" target="dialog" rel="addUser" mask="true" title="添加用户" width="850" height="530" resizable="false"><span>添加用户</span></a></li>
+			<li><a class="delete" href="${ctx}/user/deleteUsers.do" target="selectedToDo" mask="true" rel="ids" title="是否修改所选项？" width="850" height="530" resizable="false"><span>批量修改删除状态</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="80%" layoutH="112">
 		<thead>
 			<tr>
-				<!-- <th width="22" align="center"><input type="checkbox" group="ids" class="checkboxCtrl"></th>-->
+				<th width="22" align="center"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
 				<th width="50" align="center">序号</th>
 				<th width="200" align="center">用户姓名</th>
 				<th width="200" align="center">手机号码</th>
@@ -55,7 +56,7 @@
 		<tbody>
 			<c:forEach items="${list_user}" var="user" varStatus="idx">
 				<tr>
-					<!-- <td><input name="ids" value="xxx" type="checkbox"></td>-->
+				 <td><input name="ids" value="${user.userId }" type="checkbox"></td>
 					<td align="center">${idx.index + (pageSize*(currentPage-1))+1}</td>
 					<td>${user.userName}</td>
 					<td>${user.mobilePhone}</td>

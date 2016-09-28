@@ -34,7 +34,7 @@
 						<dl style="text-align: center;">
 							<dt>电话：</dt>
 							<dd>
-								<input name="tel" type="text" class="phone" value="${remark.tel}"/>
+								<input name="tel" type="text" class="phone" maxlength='11' value="${remark.tel}"/>
 							</dd>
 						</dl>
 						<dl style="text-align: center;">
