@@ -16,6 +16,15 @@ public interface NewsTypeService {
 	public Page<NewsType> findNewsTypeByCurrentPage(int currentPage,int pageSize);
 	
 	/**
+	 * 按关键字查找文章类型 ，分页
+	 * @param currentPage
+	 * @param pageSize
+	 * @param tName
+	 * @param dStatus
+	 * @return
+	 */
+	public Page<NewsType> findNewsTypeBySearch(int currentPage,int pageSize,String tName,String dStatus);
+	/**
 	 * 保存文章类型
 	 * @param newsType
 	 * @return

@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.gzpy.user.entity.User;
-import com.mysql.fabric.xmlrpc.base.Array;
 
 public class LoginFilter implements Filter {
 	

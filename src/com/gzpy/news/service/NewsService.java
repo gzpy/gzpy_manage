@@ -17,6 +17,15 @@ public interface NewsService {
 	public Page<News> findNewsByCurrentPage(int currentPage,int pageSize);
 	
 	/**
+	 * 按关键字查找文章，分页
+	 * @param currentPage
+	 * @param PageSize
+	 * @param newsTitle
+	 * @param delStatus
+	 * @return
+	 */
+	public Page<News> findNewsBySearch(int currentPage,int pageSize,String nTitle,String dStatus);
+	/**
 	 * 保存文章
 	 * @param news
 	 * @return

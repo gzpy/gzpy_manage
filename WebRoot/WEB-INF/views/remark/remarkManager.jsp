@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form id="pagerForm" method="post" action="${ctx}/goremarkManager.do">
+<form id="pagerForm" method="post" action="${ctx}/goRemarkManager.do">
 	<input type="hidden" name="pageNum" value="${currentPage}" />
 	<input type="hidden" name="numPerPage" value="${numPerPage}" />
 </form>
@@ -34,7 +34,7 @@
 		<div class="subBar">
 			<ul>
 				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
-				<li><a class="button" href="demo_page6.html" target="dialog" mask="true" title="查询框"><span>高级检索</span></a></li>
+				<!-- <li><a class="button" href="demo_page6.html" target="dialog" mask="true" title="查询框"><span>高级检索</span></a></li>-->
 			</ul>
 		</div>
 	</div>

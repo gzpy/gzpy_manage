@@ -15,6 +15,15 @@ public interface ProductService {
 	public Page<Product> findProductByCurrentPage(int currentPage,int pageSize);
 	
 	/**
+	 * 根据关键字检索产品  ，分页
+	 * @param currentPage
+	 * @param pageSize
+	 * @param productName
+	 * @param delStatus
+	 * @return
+	 */
+	public Page<Product> findProductBySearch(int currentPage,int pageSize,String pTitle,String dStatus);
+	/**
 	 * 保存产品
 	 * @param product
 	 * @return

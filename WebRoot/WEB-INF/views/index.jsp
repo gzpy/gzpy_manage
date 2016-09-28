@@ -10,6 +10,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+  	<title>品韵科技官网管理后台</title>
 	<link href="${ctx}/dwz/themes/default/style.css" rel="stylesheet" type="text/css" media="screen"/>
 	<link href="${ctx}/dwz/themes/css/core.css" rel="stylesheet" type="text/css" media="screen"/>
 	<link href="${ctx}/dwz/themes/css/print.css" rel="stylesheet" type="text/css" media="print"/>

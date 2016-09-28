@@ -14,16 +14,49 @@
 	<form id="pagerForm" method="post" action="${ctx}/news/toNewsManage.do">
 		<input type="hidden" name="pageNum" value="${currentPage}" />
 		<input type="hidden" name="numPerPage" value="${pageSize}" />
+		<input type="hidden" name="newsTitle" value="${empty newsTitle ? '':newsTitle}" />
+		<c:choose>
+			<c:when test="${delStatus eq '%N%' }">
+				<input type="hidden" name="delStatus" value="N" />
+			</c:when>
+			<c:when test="${delStatus eq '%Y%' }">
+				<input type="hidden" name="delStatus" value="Y" />
+			</c:when>
+			<c:otherwise>
+				<input type="hidden" name="delStatus" value="" />
+			</c:otherwise>
+		</c:choose>
 	</form>
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="" method="post">
+	<form onsubmit="return navTabSearch(this);" action="${ctx}/news/toNewsManage.do" method="post">
 		<div class="searchBar">
 			<table class="searchContent">
 				<tr>
 					<td>
-						<label>文章名称：</label>
-						<input type="text" name="keywords" value=""/>
+						<label>文章标题：</label>
+						<input type="text" name="newsTitle" value="" maxlength="30"/>
+					</td>
+					<td>
+						<label>删除状态：</label>
+						<c:choose>
+							<c:when test="${delStatus eq '%N%'}">
+								<input type="radio" name="delStatus" value="N" checked="checked"/>未删除
+								<input type="radio" name="delStatus" value="Y"/>已删除
+								<input type="radio" name="delStatus" value=""/>全部
+							</c:when>
+							<c:when test="${delStatus eq '%Y%'}">
+								<input type="radio" name="delStatus" value="N"/>未删除
+								<input type="radio" name="delStatus" value="Y" checked="checked"/>已删除
+								<input type="radio" name="delStatus" value=""/>全部
+							</c:when>
+							<c:otherwise>
+								<input type="radio" name="delStatus" value="N"/>未删除
+								<input type="radio" name="delStatus" value="Y"/>已删除
+								<input type="radio" name="delStatus" value="" checked="checked"/>全部
+							</c:otherwise>
+						</c:choose>
+						
 					</td>
 					<td>
 						<div class="buttonActive"><div class="buttonContent"><button type="submit">&nbsp;&nbsp;检索&nbsp;&nbsp;</button></div></div>
@@ -47,6 +80,7 @@
 				<th width="50" align="center">文章标题</th>
 				<th width="50" align="center">发布时间</th>
 				<th width="50" align="center">文章类型</th>
+				<th width="50" align="center">删除状态</th>
 				<th width="150" align="center">操作</th>
 			</tr>
 		</thead>
@@ -58,8 +92,16 @@
 					<td>${news.newsTitle}</td>
 					<td>${news.issueDate}</td>
 					<td>${news.typeName}</td>
+					<c:choose>
+						<c:when test="${news.delStatus eq 'Y' }">
+							<td style="color:red;">已删除</td>
+						</c:when>
+						<c:otherwise>
+							<td style="color:green;">未删除</td>
+						</c:otherwise>
+					</c:choose>
 					<td>
-						<a title="删除" target="ajaxTodo" href="${ctx }/news/deleteNews.do?newsId=${news.newsId}" class="btnDel">删除</a>
+						<a title="是否彻底删除？" target="ajaxTodo" href="${ctx }/news/deleteNews.do?newsId=${news.newsId}" class="btnDel">删除</a>
 						<a title="编辑" target="dialog" href="${ctx}/news/toUpdateNews.do?newsId=${news.newsId}" mask="true" title="修改文章" width="850" height="530" class="btnEdit">编辑</a>
 						<a title="查看详情" target="dialog" href="${ctx}/news/toNewsDetail.do?newsId=${news.newsId}" mask="true" title="修改文章" width="850" height="530" class="btnView">查看详情</a>
 					</td>
