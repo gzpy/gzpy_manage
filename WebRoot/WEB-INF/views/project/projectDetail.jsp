@@ -1,11 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ include file="/include.inc.jsp"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -52,7 +52,14 @@
 						</dl>
 
 					</fieldset>
-
+		<c:if test="${not empty imageList}">
+            <div class="unit">
+				<label>图片：</label>
+				 <c:forEach items="${imageList}" var="item">
+					<img src="${ctx}${item}" width="128" height="128"/>
+				</c:forEach>
+			</div>
+		</c:if>
 					<fieldset>
 						<legend>项目描述</legend>
 						<dl class="nowrap">
@@ -83,5 +90,6 @@
 			return false;
 		return true;
 	}
+	
 </script>
 

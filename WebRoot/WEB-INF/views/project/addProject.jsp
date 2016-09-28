@@ -15,7 +15,9 @@
 <body>
 	<div class="pageFormContent" layoutH="60">
 		<div class="pageContent">
-			<form method="post"  action="addProject.do" class="pageForm required-validate" onsubmit="return validateCallback(this,navTabAjaxDone);">
+			<!-- <form method="post"  action="addProject.do" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return validateCallback(this,navTabAjaxDone);">
+				<div class="pageFormContent nowrap" layoutH="97"> -->
+				<form method="post" action="addProjectPhoto.do" enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return iframeCallback(this,navTabAjaxDone);" >
 				<div class="pageFormContent nowrap" layoutH="97">
 					<fieldset>
 						<legend>添加项目</legend>
@@ -50,9 +52,17 @@
 								<input name="SEODescription" type="text" class="required" />
 							</dd>
 						</dl>
-
 					</fieldset>
-
+       
+		
+			<div class="unit">
+				<label>上传图片：</label>
+				<ul id="upload-preview" class="upload-preview"></ul>
+				<div class="upload-wrap" rel="#upload-preview">
+					<input type="file" name="file" accept="image/*" multiple="multiple">
+				</div>
+			</div>
+        
 					<fieldset>
 						<legend>项目描述</legend>
 						<dl class="nowrap">

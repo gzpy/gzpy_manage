@@ -39,7 +39,7 @@
 	<div class="pageContent">
 		<div class="panelBar">
 			<ul class="toolBar">
-				<li><a class="add" href="goAddProject.do" target="navTab"
+				<li><a class="add" href="${ctx}/goAddProject.do" target="navTab"
 					rel="dlg_page9" minable="false"><span>添加项目</span></a></li>
 				<li><a title="确实要删除这些项目吗?" target="selectedTodo" rel="ids" href="${ctx}/deleteAll.do" class="delete"><span>批量删除</span></a></li>
 			</ul>
