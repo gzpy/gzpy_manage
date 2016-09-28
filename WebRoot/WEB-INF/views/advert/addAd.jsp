@@ -26,21 +26,21 @@
 				<dl>
 					<dt style="text-align: right;">广告位排序：</dt>
 					<dd>
-						<input class="number" name="adOrder" type="text" size="26" maxlength="10"
+						<input class="number required" name="adOrder" type="text" size="26" maxlength="10"
 							value="" />
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">广告位宽度：</dt>
 					<dd>
-						<input class="number" name="adWidth" type="text" size="26"
+						<input class="number required" name="adWidth" type="text" size="26"
 							maxlength="10" value="" />
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">广告位高度：</dt>
 					<dd>
-						<input name="adHeight" type="text" class="number" size="26"
+						<input name="adHeight" type="text" class="number required" size="26"
 							maxlength="10" value="" />
 					</dd>
 				</dl>

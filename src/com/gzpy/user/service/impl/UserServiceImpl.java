@@ -27,11 +27,25 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
 	
-public Page<User> findUserByCurrentPage(int currentPage, int pageSize) {
+public Page<User> findUserByCurrentPage(int currentPage, int pageSize,final String dlStatus,final String inputName) {
+	Specification<User> spec=new Specification<User>() {
+		
+		@Override
+		public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query,
+				CriteriaBuilder cb) {
+			Path<String> delStatus =root.get("delStatus");
+			Path<String> userName =root.get("userName");
+			Predicate status=cb.like(delStatus, dlStatus);
+			Predicate name=cb.like(userName, inputName);
+			query.where(status,name);
+			
+			return query.getRestriction();
+		}
+	};
 		
 		Pageable pb = new PageRequest(currentPage - 1, pageSize,
 				Sort.Direction.ASC, "userId");
-		Page<User> page = userDao.findAll(pb);
+		Page<User> page = userDao.findAll(spec,pb);
 		
 		return page;
 	}

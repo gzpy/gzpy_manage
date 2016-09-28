@@ -9,9 +9,11 @@ public interface UserService {
 	 * 分页查找所有用户
 	 * @param currentPage
 	 * @param pageSize
+	 * @param inputName 
+	 * @param delStatus 
 	 * @return
 	 */
-	public Page<User> findUserByCurrentPage(int currentPage, int pageSize);
+	public Page<User> findUserByCurrentPage(int currentPage, int pageSize, String delStatus, String inputName);
 	//添加用户
 	public User saveUser(User user);
 	

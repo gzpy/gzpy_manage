@@ -1,10 +1,13 @@
 package com.gzpy.advert.service.impl;
 
+import java.io.File;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,10 +30,25 @@ public class AdServiceImpl implements AdService {
 	private AdDao adDao;
 
 	@Override
-	public Page<Ad> findAdByCurrentPage(int currentPage, int pageSize) {
+	public Page<Ad> findAdByCurrentPage(int currentPage, int pageSize,final String inputName,final String dlStatus) {
+		Specification<Ad> spec =new Specification<Ad>() {
+			
+			@Override
+			public Predicate toPredicate(Root<Ad> root, CriteriaQuery<?> query,
+					CriteriaBuilder cb) {
+				//获取条件字段
+				Path<String> delStatus=root.get("delStatus");
+				Path<String> adName =root.get("adName");
+				//建立查询条件
+				Predicate status=cb.like(delStatus, dlStatus);
+				Predicate name=cb.like(adName, inputName);
+				query.where(status,name);
+				return query.getRestriction();
+			}
+		};
 		Pageable pb = new PageRequest(currentPage - 1, pageSize,
 				Sort.Direction.ASC, "adOrder");
-		Page<Ad> page = adDao.findAll(pb);
+		Page<Ad> page = adDao.findAll(spec,pb);
 
 		return page;
 	}
@@ -44,8 +62,16 @@ public class AdServiceImpl implements AdService {
 
 	
 	//删除广告
-	public void deleteAd(String id) {
+	public void deleteAd(String id,HttpServletRequest request) {
 		// TODO Auto-generated method stub
+		Ad ad=adDao.findOne(id);
+		String imagePath=ad.getImagePath();
+		if(imagePath!=null){
+			//获取图片路径
+			String path=request.getSession().getServletContext().getRealPath(imagePath);
+		File image=new File(path);
+		image.delete();
+		}
 		adDao.delete(id);
 	}
 
@@ -70,5 +96,7 @@ public class AdServiceImpl implements AdService {
 		return adDao.findAll(spec,new PageRequest(currentPage - 1, pageSize,
 				Sort.Direction.ASC, "adOrder"));
 	}
+
+	
 
 }

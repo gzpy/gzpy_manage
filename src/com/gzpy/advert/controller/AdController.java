@@ -1,20 +1,21 @@
 package com.gzpy.advert.controller;
 
 import java.io.File;
-import java.io.IOException;
+
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gzpy.advert.entity.Ad;
@@ -35,8 +36,8 @@ public class AdController extends BaseController {
 	// 查找全部广告
 	@RequestMapping("/toAdManage.do")
 	public String toProductManage(String pageNum, String numPerPage,
-			ModelMap map) {
-
+			ModelMap map,String inputName,String delStatus) {
+		
 		if (pageNum == null || "".equals(pageNum)) {
 			currentPage = 1;
 		} else {
@@ -48,12 +49,26 @@ public class AdController extends BaseController {
 		} else {
 			pageSize = Integer.parseInt(numPerPage);
 		}
+		//对输入的广告名称操作
+		if(inputName==null || "".equals(inputName))
+		{
+			inputName="%";
+		}else{
+			inputName="%"+inputName+"%";
+		}
+		//对输入的delStatus进行判断
+		if(delStatus==null || "".equals(delStatus)){
+			delStatus="%";
+		}else{
+			delStatus="%"+delStatus+"%";
+		}
+		map.addAttribute("delStatus",delStatus);
 
-		int totalPage = adService.findAdByCurrentPage(currentPage, pageSize)
+		int totalPage = adService.findAdByCurrentPage(currentPage, pageSize,inputName,delStatus)
 				.getTotalPages();
-		long totalCount = adService.findAdByCurrentPage(currentPage, pageSize)
+		long totalCount = adService.findAdByCurrentPage(currentPage, pageSize,inputName,delStatus)
 				.getTotalElements();
-		List<Ad> list_ad = adService.findAdByCurrentPage(currentPage, pageSize)
+		List<Ad> list_ad = adService.findAdByCurrentPage(currentPage, pageSize,inputName,delStatus)
 				.getContent();
 
 		map.addAttribute("currentPage", currentPage);
@@ -73,45 +88,44 @@ public class AdController extends BaseController {
 
 	// 在数据库中添加广告
 	@RequestMapping("/addAd.do")
-	public ModelAndView addAd(HttpServletRequest request,MultipartFile ad_pic,Ad ad, String adWidth, String adHeight,
-			String adOrder) throws Exception {
-		// 转型为MultipartHttpRequest：   
-        //MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;   
-     // 获得文件：   
-       // MultipartFile ad_pic = multipartRequest.getFile("ad_pic");   
-		// 图片原始名称
-		String originalFilename = ad_pic.getOriginalFilename();
-		// 获得项目的路径
-				ServletContext sc = request.getSession().getServletContext();
+	public ModelAndView addAd(HttpServletRequest request, MultipartFile ad_pic,
+			Ad ad) throws Exception {
+		// 转型为MultipartHttpRequest：
+		// MultipartHttpServletRequest multipartRequest =
+		// (MultipartHttpServletRequest) request;
+		// 获得文件：
+		// MultipartFile ad_pic = multipartRequest.getFile("ad_pic");
+	
+		if (ad_pic != null) {
+			// 图片原始名称
+			String originalFilename = ad_pic.getOriginalFilename();
 
-		System.out.println(originalFilename);
-		// 上传图片
-		if (ad_pic != null && originalFilename != null
-				&& originalFilename.length() > 0) {
+			// 获得项目的路径
+			ServletContext sc = request.getSession().getServletContext();
+			// 上传图片
+			if (originalFilename != null && originalFilename.length() > 0) {
 
-			// 存储图片的路径
-			String pic_path =sc.getRealPath("/upload/advert") + "/";
-			//System.out.println(pic_path);
-			// 新的图片名称
-			String newFileName = UUID.randomUUID()
-					+ originalFilename.substring(originalFilename
-							.lastIndexOf("."));
-			// 新图片
-			
-			File newFile = new File(pic_path + newFileName);
-			if(!newFile.exists()){
-				newFile.mkdirs();
+				// 存储图片的路径
+				String pic_path = sc.getRealPath("/upload/advert") + "/";
+				// System.out.println(pic_path);
+				// 新的图片名称
+				String newFileName = UUID.randomUUID()
+						+ originalFilename.substring(originalFilename
+								.lastIndexOf("."));
+				// 新图片
+
+				File newFile = new File(pic_path + newFileName);
+				if (!newFile.exists()) {
+					newFile.mkdirs();
+				}
+
+				// 将内存中的数据写入磁盘
+				ad_pic.transferTo(newFile);
+
+				// 将新图片名称写到ad中
+				ad.setImagePath("/upload/advert/" + newFileName);
 			}
-			
-			// 将内存中的数据写入磁盘
-			ad_pic.transferTo(newFile);
-
-			// 将新图片名称写到ad中
-			ad.setImagePath(newFileName);
 		}
-		ad.setAdHeight(Integer.parseInt(adHeight));
-		ad.setAdWidth(Integer.parseInt(adWidth));
-		ad.setAdOrder(Integer.parseInt(adOrder));
 		ad.setId(GenerateGUID.getGuid());
 		ad.setDelStatus("N");
 		Ad result = adService.saveAd(ad);
@@ -124,9 +138,9 @@ public class AdController extends BaseController {
 
 	// 删除广告
 	@RequestMapping("/deleteAd.do")
-	public ModelAndView deleteAd(String id) {
+	public ModelAndView deleteAd(String id, HttpServletRequest request) {
 		try {
-			adService.deleteAd(id);
+			adService.deleteAd(id, request);
 			return this.ajaxDoneSuccess("删除成功", "adManage", "");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -144,24 +158,46 @@ public class AdController extends BaseController {
 
 	// 提交编辑后的广告数据
 	@RequestMapping("/updateAd.do")
-	public ModelAndView updateAd(Ad ad, String adWidth, String adHeight,
-			String adOrder) {
-		ad.setAdHeight(Integer.parseInt(adHeight));
-		ad.setAdWidth(Integer.parseInt(adWidth));
-		ad.setAdOrder(Integer.parseInt(adOrder));
+	public ModelAndView updateAd(HttpServletRequest request,Ad ad,MultipartFile ad_pic) throws Exception {
 
 		Ad oldAd = adService.findAdById(ad.getId());
+		//获取图片原始名称
+		String originalFilename=ad_pic.getOriginalFilename();
+		System.out.println(originalFilename.length());
+		if(originalFilename!=null && originalFilename.length()>0){
+			
+			//获取项目的路径
+			ServletContext sc=request.getSession().getServletContext();
+			if(oldAd.getImagePath()==null || "".equals(oldAd.getImagePath())){
+				// 存储图片的路径
+				String pic_path = sc.getRealPath("/upload/advert") + "/";
+				// System.out.println(pic_path);
+				// 新的图片名称
+				String newFileName = UUID.randomUUID()
+						+ originalFilename.substring(originalFilename
+								.lastIndexOf("."));
+				// 新图片
 
-		if (ad.getDelStatus() == null || "".equals(ad.getDelStatus())) {
-			ad.setDelStatus(oldAd.getDelStatus());
-		}
-		if (ad.getAdLink() == null || "".equals(ad.getAdLink())) {
-			ad.setAdLink(oldAd.getAdLink());
-		}
-		if (ad.getImagePath() == null || "".equals(ad.getImagePath())) {
-			ad.setImagePath(oldAd.getImagePath());
-		}
+				File newFile = new File(pic_path + newFileName);
+				if (!newFile.exists()) {
+					newFile.mkdirs();	
+			}
+				// 将内存中的数据写入磁盘
+				ad_pic.transferTo(newFile);
 
+				// 将新图片名称写到ad中
+				ad.setImagePath("/upload/advert/" + newFileName);
+		}
+			else{
+				String path=oldAd.getImagePath();
+				File newFile=new File(sc.getRealPath(path));
+				// 将新图片的数据写入磁盘
+				ad_pic.transferTo(newFile);
+				//获取旧图片路径并保存为新图片路径
+				ad.setImagePath(oldAd.getImagePath());
+			}
+		}
+		ad.setAdDescription(oldAd.getAdDescription());
 		Ad result = adService.saveAd(ad);
 
 		if (result == null || "".equals(result)) {

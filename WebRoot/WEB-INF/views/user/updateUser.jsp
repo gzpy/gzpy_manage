@@ -76,13 +76,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dl>
 					<dt style="text-align: right;">删除状态：</dt>
 					<dd>
-						<!-- <input name="delStatus" value="${user.delStatus }" type="text" size="26" /> -->
-						<select class="combox" name="delStatus" value="${user.delStatus }">
-						<option value="N">N</option>
-						<option value="Y">Y</option>
-						
-						
-						</select>
+						<c:choose>
+							<c:when test="${user.delStatus eq 'Y' }">	
+								<input name="delStatus" type="radio" value="Y" checked="checked"/>Y
+								<input name="delStatus" type="radio" value="N">N
+							</c:when>
+							<c:otherwise>
+								<input name="delStatus" type="radio" value="Y"/>Y
+								<input name="delStatus" type="radio" value="N" checked="checked">N
+							</c:otherwise>
+						</c:choose>
 					</dd>
 				</dl>
 				
