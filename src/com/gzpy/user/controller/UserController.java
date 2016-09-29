@@ -31,7 +31,7 @@ private int currentPage;//当前页码
 	
 	private int pageSize;//单个页面显示数量
 	@RequestMapping("/toUserManage.do")
-	public String toUserManage(String pageNum,String numPerPage,ModelMap map){
+	public String toUserManage(String pageNum,String numPerPage,ModelMap map,String delStatus,String inputName){
 		if(pageNum == null || "".equals(pageNum)){
 			currentPage = 1;
 		} else {
@@ -43,9 +43,22 @@ private int currentPage;//当前页码
 		} else {
 			pageSize = Integer.parseInt(numPerPage);
 		}
-		int totalPage = userService.findUserByCurrentPage(currentPage, pageSize).getTotalPages();
-		long totalCount = userService.findUserByCurrentPage(currentPage,pageSize).getTotalElements();
-		List<User> list_user = userService.findUserByCurrentPage(currentPage,pageSize).getContent();
+		//对输入的用户名进行判断
+		if(inputName==null || "".equals(inputName)){
+			inputName="%";
+		}else{
+			inputName="%"+inputName+"%";
+		}
+		//对输入的delStatus进行判断
+		if(delStatus==null || "".equals(delStatus)){
+			delStatus="%";
+		}else{
+			delStatus="%"+delStatus+"%";
+		}
+		map.addAttribute("delStatus",delStatus);
+		int totalPage = userService.findUserByCurrentPage(currentPage, pageSize,delStatus,inputName).getTotalPages();
+		long totalCount = userService.findUserByCurrentPage(currentPage,pageSize,delStatus,inputName).getTotalElements();
+		List<User> list_user = userService.findUserByCurrentPage(currentPage,pageSize,delStatus,inputName).getContent();
 		map.addAttribute("currentPage", currentPage);
 		map.addAttribute("pageSize", pageSize);
 		map.addAttribute("totalPage", totalPage);

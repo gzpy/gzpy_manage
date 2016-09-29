@@ -52,7 +52,7 @@
 							<c:otherwise>
 								<input type="radio" name="delStatus" value="N"/>未删除
 								<input type="radio" name="delStatus" value="Y"/>已删除
-								<input type="radio" name="delStatus" value=""  checked="checked"/>全部
+								<input type="radio" name="delStatus"   checked="checked"/>全部
 							</c:otherwise>
 						</c:choose>
 						

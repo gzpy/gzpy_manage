@@ -52,7 +52,7 @@
 				<dt style="text-align: right;">广告图片：</dt>
 				<dd>
 					<c:if test="${ad.imagePath !=null}">
-						<img src="${ctx }/upload/advert/${ad.imagePath}" width="${ad.adWidth }" height="${ad.adHeight }"/>
+						<img src="${ctx }${ad.imagePath}" width="${ad.adWidth }" height="${ad.adHeight }"/>
 						<br />
 					</c:if>
 				
