@@ -54,8 +54,12 @@ public class AdController extends BaseController {
 		{
 			inputName="%";
 		}else{
+			map.addAttribute("inputName", inputName);
 			inputName="%"+inputName+"%";
 		}
+		
+		
+		
 		//对输入的delStatus进行判断
 		if(delStatus==null || "".equals(delStatus)){
 			delStatus="%";

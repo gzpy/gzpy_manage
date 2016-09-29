@@ -47,6 +47,7 @@ private int currentPage;//当前页码
 		if(inputName==null || "".equals(inputName)){
 			inputName="%";
 		}else{
+			map.addAttribute("inputName", inputName);
 			inputName="%"+inputName+"%";
 		}
 		//对输入的delStatus进行判断
