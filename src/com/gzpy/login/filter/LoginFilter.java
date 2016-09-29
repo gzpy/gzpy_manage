@@ -61,6 +61,7 @@ public class LoginFilter implements Filter {
 		List<String> unfilteredUrls = new ArrayList<String>();
 		unfilteredUrls.add("/login");
 		unfilteredUrls.add("/dwz");
+		unfilteredUrls.add("/upload");
 		
 		if ((unfilteredUrls != null) && (unfilteredUrls.size() > 0)) {
 		      for (String unfilteredUrl : unfilteredUrls) {
