@@ -23,33 +23,44 @@
 							maxlength="50" />
 					</dd>
 				</dl>
+		
 				<dl>
 					<dt style="text-align: right;">广告位排序：</dt>
 					<dd>
-						<input class="number required" name="adOrder" type="text" size="26" maxlength="10"
-							value="" />
+						<input name="adOrder" type="text" size="26" maxlength="10" class="number"/>
 					</dd>
 				</dl>
+		
 				<dl>
 					<dt style="text-align: right;">广告位宽度：</dt>
 					<dd>
-						<input class="number required" name="adWidth" type="text" size="26"
-							maxlength="10" value="" />
+						<input class="number" name="adWidth" type="text" size="26"
+							maxlength="10" />
 					</dd>
 				</dl>
 				<dl>
 					<dt style="text-align: right;">广告位高度：</dt>
 					<dd>
-						<input name="adHeight" type="text" class="number required" size="26"
-							maxlength="10" value="" />
+						<input class="number" name="adHeight" type="text"  size="26"
+							maxlength="10" />
 					</dd>
 				</dl>
+		
+				<dl>
+					<dt style="text-align: right;">广告链接：</dt>
+					<dd>
+						<input name="adLink" type="text" size="26"
+							maxlength="50" value="" />
+					</dd>
+				</dl>
+			
 				<dl>
 					<dt style="text-align: right;">广告图片：</dt>
 					<dd>
 						<input type="file" name="ad_pic" />
 					</dd>
 				</dl>
+			
 				<dl class="nowrap">
 					<dt style="text-align: right;">广告描述：</dt>
 					<dd>
