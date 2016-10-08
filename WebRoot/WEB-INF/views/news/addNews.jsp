@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
    	<div class="pageContent">
-		<form method="post" action="${ctx}/news/addNews.do" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<form method="post" enctype="multipart/form-data" action="${ctx}/news/addNews.do" class="pageForm required-validate" onsubmit="return iframeCallback(this, dialogAjaxDone);">
 			<div class="pageFormContent" layoutH="58">
 				<dl>
 					<dt style="text-align: right;">新闻标题：</dt>
@@ -45,6 +45,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<dt style="text-align: right;">SEO描述：</dt>
 					<dd>
 						<textarea class="textInput" rows="2" cols="80" name="SEODescription"></textarea>
+					</dd>
+				</dl>
+				<dl class="nowrap">
+					<dt style="text-align: right;">选择图片：</dt>
+					<dd>
+						<input type="file" name="file"/>
 					</dd>
 				</dl>
 				<dl class="nowrap">

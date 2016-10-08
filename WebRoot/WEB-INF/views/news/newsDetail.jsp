@@ -29,6 +29,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<textarea class="textInput" rows="2" cols="80" name="SEODescription" readonly="readonly">${news.SEODescription }</textarea>
 				</dd>
 			</dl>
+			<c:if test="${!empty news.imagePath }">
+			<dl class="nowrap">
+				<dt style="text-align: right;">文章图片：</dt>
+				<dd>
+					<img src="${ctx }${news.imagePath}" height="200px" width="300px"/>			
+				</dd>
+			</dl>
+			</c:if>
 			<dl class="nowrap">
 				<dt style="text-align: right;">文章内容：</dt>
 				<dd>

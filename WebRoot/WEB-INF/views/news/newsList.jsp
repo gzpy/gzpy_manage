@@ -102,7 +102,7 @@
 					</c:choose>
 					<td>
 						<a title="是否彻底删除？" target="ajaxTodo" href="${ctx }/news/deleteNews.do?newsId=${news.newsId}" class="btnDel">删除</a>
-						<a title="编辑" target="dialog" href="${ctx}/news/toUpdateNews.do?newsId=${news.newsId}" mask="true" title="修改文章" width="850" height="530" class="btnEdit">编辑</a>
+						<a title="编辑" target="dialog" href="${ctx}/news/toUpdateNews.do?newsId=${news.newsId}" mask="true" title="修改文章" width="850" height="560" class="btnEdit">编辑</a>
 						<a title="查看详情" target="dialog" href="${ctx}/news/toNewsDetail.do?newsId=${news.newsId}" mask="true" title="修改文章" width="850" height="530" class="btnView">查看详情</a>
 					</td>
 				</tr>

@@ -30,6 +30,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</dd>
 			</dl>
 			<dl class="nowrap">
+				<dt style="text-align: right;">产品图片：</dt>
+				<dd>
+					<img alt="${product.productTitle }" src="${ctx }${product.imagePath }" height="200px" width="300px"/>
+				</dd>
+			</dl>
+			<dl class="nowrap">
 				<dt style="text-align: right;">产品简介：</dt>
 				<dd>
 					<textarea class="editor" rows="15" cols="80" name="newsContent">${product.introduction }</textarea>

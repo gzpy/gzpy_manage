@@ -1,14 +1,20 @@
 package com.gzpy.news.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gzpy.common.BaseController;
@@ -96,9 +102,58 @@ public class NewsController extends BaseController {
 	}
 
 	@RequestMapping("/addNews.do")
-	public ModelAndView addNews(News news,HttpSession session) {
-		
-		User user = (User) session.getAttribute("currentUser");
+	public ModelAndView addNews(@RequestParam MultipartFile file, News news,
+			HttpServletRequest request) {
+
+		List<String> allowTypes = new ArrayList<String>();// 设置允许上传的类型
+		allowTypes.add(".jpg");
+		allowTypes.add(".jepg");
+		allowTypes.add(".bmp");
+		allowTypes.add(".png");
+
+		if (file != null && file.getSize() > 0) {
+			String fileOriginName = file.getOriginalFilename();
+			String ext = fileOriginName.substring(
+					fileOriginName.lastIndexOf("."), fileOriginName.length());
+
+			boolean flag = false;
+
+			for (String allowType : allowTypes) {
+				if (ext.equals(allowType)) {
+					flag = true;
+				}
+			}
+
+			if (!flag) {
+				return this.ajaxDoneError("请选择图片格式文件!");
+			}
+
+			if (file.getSize() > 10485760) {
+				return this.ajaxDoneError("选择文件不能超过10M");
+			}
+
+			String filePath = request.getSession().getServletContext()
+					.getRealPath("/upload/news");// 设置上传路径
+
+			File fileUpload = new File(filePath);
+			if (!fileUpload.exists()) {
+				fileUpload.mkdirs();
+			}
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+			String fileName = sdf.format(new java.util.Date()) + ".jpg";
+
+			try {
+				file.transferTo(new File(filePath + "\\" + fileName));// 上传文件
+				news.setImagePath("\\upload\\news\\" + fileName);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		User user = (User) request.getSession().getAttribute("currentUser");
 		news.setUserId(user.getUserId());
 		news.setNewsId(GenerateGUID.getGuid());
 		news.setIssueDate(new Date());
@@ -126,7 +181,14 @@ public class NewsController extends BaseController {
 	}
 
 	@RequestMapping("/updateNews.do")
-	public ModelAndView updateNews(News news) {
+	public ModelAndView updateNews(@RequestParam MultipartFile file, News news,
+			HttpServletRequest request) {
+
+		List<String> allowTypes = new ArrayList<String>();
+		allowTypes.add(".jpg");
+		allowTypes.add(".jepg");
+		allowTypes.add(".bmp");
+		allowTypes.add(".png");
 
 		News oldNews = newsService.findNewsById(news.getNewsId());
 
@@ -146,8 +208,57 @@ public class NewsController extends BaseController {
 			news.setUserId(oldNews.getUserId());
 		}
 
-		if (news.getDelStatus() == null || "".equals(news.getDelStatus())) {
-			news.setDelStatus(oldNews.getDelStatus());
+		if (file != null && file.getSize() > 0) {
+
+			String fileOriginName = file.getOriginalFilename();
+			String ext = fileOriginName.substring(
+					fileOriginName.lastIndexOf("."), fileOriginName.length());
+
+			boolean flag = false;
+
+			for (String allowType : allowTypes) {
+				if (ext.equals(allowType)) {
+					flag = true;
+				}
+			}
+
+			if (!flag) {
+				return this.ajaxDoneError("请选择图片格式文件!");
+			}
+
+			if (file.getSize() > 10485760) {
+				return this.ajaxDoneError("选择文件不能超过10M");
+			}
+
+			String filePath = request.getSession().getServletContext()
+					.getRealPath("/upload/news");
+
+			File fileUpload = new File(filePath);
+			if (!fileUpload.exists()) {
+				fileUpload.mkdirs();
+			}
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+			String fileName = sdf.format(new java.util.Date()) + ".jpg";
+
+			try {
+				file.transferTo(new File(filePath + "\\" + fileName));
+				news.setImagePath("\\upload\\news\\" + fileName);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			if (!(oldNews.getImagePath() == null || "".equals(oldNews
+					.getImagePath()))) {
+				File oldFile = new File(request.getSession()
+						.getServletContext()
+						.getRealPath(oldNews.getImagePath()));
+				if (oldFile.exists()) {
+					oldFile.delete();
+				}
+			}
 		}
 
 		News result = newsService.saveNews(news);
@@ -160,7 +271,17 @@ public class NewsController extends BaseController {
 	}
 
 	@RequestMapping("/deleteNews.do")
-	public ModelAndView deleteNews(String newsId) {
+	public ModelAndView deleteNews(String newsId, HttpServletRequest request) {
+
+		News news = newsService.findNewsById(newsId);
+
+		if (!(news.getImagePath() == null || "".equals(news.getImagePath()))) {
+			File oldFile = new File(request.getSession().getServletContext()
+					.getRealPath(news.getImagePath()));
+			if (oldFile.exists()) {
+				oldFile.delete();
+			}
+		}
 
 		try {
 			newsService.deleteNews(newsId);

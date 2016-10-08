@@ -107,7 +107,7 @@ public class ProductController extends BaseController {
 	public ModelAndView addProduct(@RequestParam MultipartFile file,
 			Product product, String productIssueDate, HttpServletRequest request) {
 
-		List<String> allowTypes = new ArrayList<String>();
+		List<String> allowTypes = new ArrayList<String>();//设置允许上传的类型
 		allowTypes.add(".jpg");
 		allowTypes.add(".jepg");
 		allowTypes.add(".bmp");
@@ -135,7 +135,7 @@ public class ProductController extends BaseController {
 			}
 
 			String filePath = request.getSession().getServletContext()
-					.getRealPath("/upload/product");
+					.getRealPath("/upload/product");//设置上传路径
 
 			File fileUpload = new File(filePath);
 			if (!fileUpload.exists()) {
@@ -146,7 +146,7 @@ public class ProductController extends BaseController {
 			String fileName = sdf.format(new java.util.Date()) + ".jpg";
 
 			try {
-				file.transferTo(new File(filePath + "\\" + fileName));
+				file.transferTo(new File(filePath + "\\" + fileName));//上传文件
 				product.setImagePath("\\upload\\product\\" + fileName);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
