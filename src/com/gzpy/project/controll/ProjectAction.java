@@ -94,7 +94,7 @@ public class ProjectAction extends BaseController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Project project = projectService.findProjectById(projectId);
 		String issueDate = dateFormat.format(project.getIssueDate());
-		if (project.getImagePath() != null) {
+		if (project.getImagePath() != null&&!"".equals(project.getImagePath())) {
 			List<String> list = Arrays
 					.asList(project.getImagePath().split(","));
 			map.addAttribute("imageList", list);
@@ -140,6 +140,7 @@ public class ProjectAction extends BaseController {
 		Date issueDate = Date.valueOf(PushDate);
 		project.setIssueDate(issueDate);
 		project.setDelStatus("N");
+	
 		String path=fileupload(files, request);
 		project.setImagePath(path);
 		Project p = projectService.updateProject(project);
@@ -156,7 +157,7 @@ public class ProjectAction extends BaseController {
 		map.addAttribute("project", project);
 		// 转变为集合
 		List<String> list;
-		if (project.getImagePath() != null) {
+		if (project.getImagePath() != null&&!"".equals(project.getImagePath())) {
 			list = Arrays.asList(project.getImagePath().split(","));
 			map.addAttribute("imageList", list);
 		}
