@@ -26,6 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<input name="adOrder" type="text" size="26" maxlength="10" value="${ad.adOrder }"/>
 					</dd>
 				</dl>
+		
 				<dl>
 					<dt style="text-align: right;">广告位宽度：</dt>
 					<dd>
@@ -38,6 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<input class="number" name="adHeight" type="text" size="26" maxlength="10" value="${ad.adHeight }"/>
 					</dd>
 				</dl>
+			
 				<dl>
 					<dt style="text-align: right;">删除状态：</dt>
 					<dd>
@@ -51,6 +53,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<input name="delStatus" type="radio" value="N" checked="checked">N
 							</c:otherwise>
 						</c:choose>
+					</dd>
+				</dl>
+				<dl>
+					<dt style="text-align: right;">广告链接：</dt>
+					<dd>
+						<input name="adLink" type="text" size="26" maxlength="50" value="${ad.adLink }"/>
 					</dd>
 				</dl>
 				<dl>

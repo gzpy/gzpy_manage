@@ -77,7 +77,7 @@
 			<tr>
 				<!-- <th width="22" align="center"><input type="checkbox" group="ids" class="checkboxCtrl"></th>-->
 				<th width="40" align="center">序号</th>
-				<th width="50" align="center">文章标题</th>
+				<th width="80" align="center">文章标题</th>
 				<th width="50" align="center">发布时间</th>
 				<th width="50" align="center">文章类型</th>
 				<th width="50" align="center">删除状态</th>

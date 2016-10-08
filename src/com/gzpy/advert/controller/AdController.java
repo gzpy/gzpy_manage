@@ -1,7 +1,6 @@
 package com.gzpy.advert.controller;
 
 import java.io.File;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -9,13 +8,13 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gzpy.advert.entity.Ad;
@@ -54,8 +53,12 @@ public class AdController extends BaseController {
 		{
 			inputName="%";
 		}else{
+			map.addAttribute("inputName", inputName);
 			inputName="%"+inputName+"%";
 		}
+		
+		
+		
 		//对输入的delStatus进行判断
 		if(delStatus==null || "".equals(delStatus)){
 			delStatus="%";
@@ -88,13 +91,14 @@ public class AdController extends BaseController {
 
 	// 在数据库中添加广告
 	@RequestMapping("/addAd.do")
-	public ModelAndView addAd(HttpServletRequest request, MultipartFile ad_pic,
+	public ModelAndView addAd(HttpServletRequest request,MultipartFile ad_pic,
 			Ad ad) throws Exception {
 		// 转型为MultipartHttpRequest：
 		// MultipartHttpServletRequest multipartRequest =
 		// (MultipartHttpServletRequest) request;
 		// 获得文件：
 		// MultipartFile ad_pic = multipartRequest.getFile("ad_pic");
+		
 	
 		if (ad_pic != null) {
 			// 图片原始名称

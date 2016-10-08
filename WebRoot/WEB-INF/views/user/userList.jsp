@@ -14,6 +14,19 @@
 	<form id="pagerForm" method="post" action="${ctx}/user/toUserManage.do">
 		<input type="hidden" name="pageNum" value="${currentPage}" /> <input
 			type="hidden" name="numPerPage" value="${pageSize}" />
+			
+			<input type="hidden" name="inputName" value="${empty inputName ? '' : inputName}" />
+		<c:choose>
+			<c:when test="${delStatus eq '%N%' }">
+				<input type="hidden" name="delStatus" value="N" />
+			</c:when>
+			<c:when test="${delStatus eq '%Y%' }">
+				<input type="hidden" name="delStatus" value="Y" />
+			</c:when>
+			<c:otherwise>
+				<input type="hidden" name="delStatus" value="" />
+			</c:otherwise>
+			</c:choose>
 	</form>
 
 	<div class="pageHeader">

@@ -27,16 +27,16 @@ public class Ad implements Serializable {
 	private String adDescription; 
 	
 	@Column(name = "adWidth")
-	private int adWidth; 
+	private Integer adWidth; 
 	
 	@Column(name = "adHeight")
-	private int adHeight; 
+	private Integer adHeight; 
 	
 	@Column(name = "imagePath")
 	private String imagePath; 
 	
 	@Column(name = "adOrder")
-	private int adOrder; 
+	private Integer adOrder; 
 	
 	@Column(name = "delStatus")
 	private String delStatus;
@@ -73,19 +73,19 @@ public class Ad implements Serializable {
 		this.adDescription = adDescription;
 	}
 
-	public int getAdWidth() {
+	public Integer getAdWidth() {
 		return adWidth;
 	}
 
-	public void setAdWidth(int adWidth) {
+	public void setAdWidth(Integer adWidth) {
 		this.adWidth = adWidth;
 	}
 
-	public int getAdHeight() {
+	public Integer getAdHeight() {
 		return adHeight;
 	}
 
-	public void setAdHeight(int adHeight) {
+	public void setAdHeight(Integer adHeight) {
 		this.adHeight = adHeight;
 	}
 
@@ -97,13 +97,11 @@ public class Ad implements Serializable {
 		this.imagePath = imagePath;
 	}
 
-	
-
-	public int getAdOrder() {
+	public Integer getAdOrder() {
 		return adOrder;
 	}
 
-	public void setAdOrder(int adOrder) {
+	public void setAdOrder(Integer adOrder) {
 		this.adOrder = adOrder;
 	}
 
@@ -117,6 +115,6 @@ public class Ad implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	} 
-	
+	}
+
 }

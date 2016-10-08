@@ -48,6 +48,7 @@
 						size="20" maxlength="1" readonly="readonly" />
 				</dd>
 			</dl>
+				
 			<dl>
 				<dt style="text-align: right;">广告图片：</dt>
 				<dd>
@@ -58,6 +59,12 @@
 				
 				</dd>
 			</dl>
+			<dl>
+					<dt style="text-align: right;">广告链接：</dt>
+					<dd>
+						<input name="adLink" type="text" size="20" maxlength="50" value="${ad.adLink }" readonly="readonly"/>
+					</dd>
+				</dl>
 			<dl class="nowrap">
 				<dt style="text-align: right;">广告描述：</dt>
 				<dd>
