@@ -107,7 +107,7 @@ public class ProductController extends BaseController {
 	public ModelAndView addProduct(@RequestParam MultipartFile file,
 			Product product, String productIssueDate, HttpServletRequest request) {
 
-		List<String> allowTypes = new ArrayList<String>();//设置允许上传的类型
+		List<String> allowTypes = new ArrayList<String>();// 设置允许上传的类型
 		allowTypes.add(".jpg");
 		allowTypes.add(".jepg");
 		allowTypes.add(".bmp");
@@ -135,7 +135,7 @@ public class ProductController extends BaseController {
 			}
 
 			String filePath = request.getSession().getServletContext()
-					.getRealPath("/upload/product");//设置上传路径
+					.getRealPath("/upload/product");// 设置上传路径
 
 			File fileUpload = new File(filePath);
 			if (!fileUpload.exists()) {
@@ -146,7 +146,7 @@ public class ProductController extends BaseController {
 			String fileName = sdf.format(new java.util.Date()) + ".jpg";
 
 			try {
-				file.transferTo(new File(filePath + "\\" + fileName));//上传文件
+				file.transferTo(new File(filePath + "\\" + fileName));// 上传文件
 				product.setImagePath("\\upload\\product\\" + fileName);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
@@ -270,7 +270,8 @@ public class ProductController extends BaseController {
 			if (!(oldProduct.getImagePath() == null || "".equals(oldProduct
 					.getImagePath()))) {
 				File oldFile = new File(request.getSession()
-						.getServletContext().getRealPath(oldProduct.getImagePath()));
+						.getServletContext()
+						.getRealPath(oldProduct.getImagePath()));
 				if (oldFile.exists()) {
 					oldFile.delete();
 				}
@@ -294,19 +295,20 @@ public class ProductController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/deleteProduct.do")
-	public ModelAndView deleteProduct(String productId,HttpServletRequest request) {
+	public ModelAndView deleteProduct(String productId,
+			HttpServletRequest request) {
 
 		Product product = productService.findProductById(productId);
-		
+
 		if (!(product.getImagePath() == null || "".equals(product
 				.getImagePath()))) {
-			File oldFile = new File(request.getSession()
-					.getServletContext().getRealPath(product.getImagePath()));
+			File oldFile = new File(request.getSession().getServletContext()
+					.getRealPath(product.getImagePath()));
 			if (oldFile.exists()) {
 				oldFile.delete();
 			}
 		}
-		
+
 		try {
 			productService.deleteProduct(productId);
 			return this.ajaxDoneSuccess("删除成功", "productManage", "");
@@ -316,6 +318,13 @@ public class ProductController extends BaseController {
 		return this.ajaxDoneError("删除失败");
 	}
 
+	/**
+	 * 查看产品详情
+	 * 
+	 * @param productId
+	 * @param map
+	 * @return
+	 */
 	@RequestMapping("/toProductDetail.do")
 	public String toProductDetail(String productId, ModelMap map) {
 
@@ -323,5 +332,23 @@ public class ProductController extends BaseController {
 		map.addAttribute("product", product);
 
 		return "product/productDetail.jsp";
+	}
+
+	@RequestMapping("/deleteProducts")
+	public ModelAndView deleteProducts(HttpServletRequest request) {
+
+		String ids[] = request.getParameterValues("ids");
+		try {
+			for (String id : ids) {
+				Product product = productService.findProductById(id);
+				product.setDelStatus("Y");
+				productService.saveProduct(product);
+			}
+			return this.ajaxDoneSuccess("删除成功", "productManage", "");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return this.ajaxDoneError("删除失败");
 	}
 }

@@ -49,7 +49,7 @@ public class NewsController extends BaseController {
 		}
 
 		if (numPerPage == null || "".equals(numPerPage)) {
-			pageSize = 5;
+			pageSize = 20;
 		} else {
 			pageSize = Integer.parseInt(numPerPage);
 		}
@@ -300,5 +300,24 @@ public class NewsController extends BaseController {
 		map.addAttribute("news", news);
 
 		return "news/newsDetail.jsp";
+	}
+	
+	@RequestMapping("/deleteBatch.do")
+	public ModelAndView deleteBatch(HttpServletRequest request){
+		
+		String ids[] = request.getParameterValues("ids");
+		try {
+			for (String id : ids) {
+				News news = newsService.findNewsById(id);
+				news.setDelStatus("Y");
+				newsService.saveNews(news);
+			}
+			return this.ajaxDoneSuccess("删除成功", "newsManage", "");
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return this.ajaxDoneError("删除失败");
 	}
 }

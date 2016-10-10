@@ -2,6 +2,8 @@ package com.gzpy.news.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -46,7 +48,7 @@ public class NewsTypeController extends BaseController {
 		}
 
 		if (numPerPage == null || "".equals(numPerPage)) {
-			pageSize = 5;
+			pageSize = 20;
 		} else {
 			pageSize = Integer.parseInt(numPerPage);
 		}
@@ -67,7 +69,7 @@ public class NewsTypeController extends BaseController {
 		}
 
 		map.addAttribute("delStatus", delStatus);
-		
+
 		int totalPage = newsTypeService.findNewsTypeBySearch(currentPage,
 				pageSize, typeName, delStatus).getTotalPages();
 		long totalCount = newsTypeService.findNewsTypeBySearch(currentPage,
@@ -167,6 +169,32 @@ public class NewsTypeController extends BaseController {
 			newsTypeService.deleteNewsType(typeId);
 			return this.ajaxDoneSuccess("删除成功", "newsTypeManage", "");
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return this.ajaxDoneError("删除失败");
+	}
+
+	@RequestMapping("/deleteTypes.do")
+	public ModelAndView deleteTypes(HttpServletRequest request) {
+
+		String ids[] = request.getParameterValues("ids");
+		try {
+			for (String id : ids) {
+				List<News> list_news = newsService.findNewsByType(id);
+
+				if (list_news != null && list_news.size() > 0) {
+					return this.ajaxDoneError("存在所选类型文章，请勿删除！");
+				}
+			}
+			for (String id : ids) {
+				NewsType nt = newsTypeService.findNewsTypeById(id);
+				nt.setDelStatus("Y");
+				newsTypeService.saveNewsType(nt);
+			}
+			return this.ajaxDoneSuccess("删除成功", "newsTypeManage", "");
+		} catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
 		}
 

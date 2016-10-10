@@ -70,12 +70,13 @@
 	<div class="panelBar">
 		<ul class="toolBar">
 			<li><a class="add" href="${ctx}/newsType/toAddNewsType.do" target="dialog" rel="addnewsType" mask="true" title="添加文章类型" width="550" height="150" resizable="false"><span>添加文章类型</span></a></li>
+			<li><a class="delete" href="${ctx}/newsType/deleteTypes.do" target="selectedToDo" title="确定删除？"><span>批量删除</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="80%" layoutH="112">
 		<thead>
 			<tr>
-				<!-- <th width="22" align="center"><input type="checkbox" group="ids" class="checkboxCtrl"></th>-->
+				<th width="22" align="center"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
 				<th width="40" align="center">序号</th>
 				<th width="50" align="center">文章类型</th>
 				<th width="50" align="center">删除状态</th>
@@ -85,7 +86,7 @@
 		<tbody>
 			<c:forEach items="${list_newsType}" var="newsType" varStatus="idx">
 				<tr>
-					<!-- <td><input name="ids" value="xxx" type="checkbox"></td>-->
+					<td><input name="ids" value="${newsType.typeId }" type="checkbox"></td>
 					<td align="center">${idx.index + (pageSize*(currentPage-1))+1}</td>
 					<td>${newsType.typeName}</td>
 					<c:choose>

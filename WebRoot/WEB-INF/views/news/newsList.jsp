@@ -70,12 +70,13 @@
 	<div class="panelBar">
 		<ul class="toolBar">
 			<li><a class="add" href="${ctx}/news/toAddNews.do" target="dialog" rel="addnews" mask="true" title="添加文章" width="850" height="530" resizable="false"><span>添加文章</span></a></li>
+			<li><a class="delete" href="${ctx}/news/deleteBatch.do" target="selectedToDo" title="确定删除？"><span>批量删除</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="80%" layoutH="112">
 		<thead>
 			<tr>
-				<!-- <th width="22" align="center"><input type="checkbox" group="ids" class="checkboxCtrl"></th>-->
+				<th width="22" align="center"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
 				<th width="40" align="center">序号</th>
 				<th width="80" align="center">文章标题</th>
 				<th width="50" align="center">发布时间</th>
@@ -87,7 +88,7 @@
 		<tbody>
 			<c:forEach items="${list_news}" var="news" varStatus="idx">
 				<tr>
-					<!-- <td><input name="ids" value="xxx" type="checkbox"></td>-->
+					<td><input name="ids" value="${news.newsId }" type="checkbox"></td>
 					<td align="center">${idx.index + (pageSize*(currentPage-1))+1}</td>
 					<td>${news.newsTitle}</td>
 					<td>${news.issueDate}</td>
